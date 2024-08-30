@@ -43,6 +43,14 @@ input{
     background-color: #f1f1f1;
     border-radius: 5px;
     padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-container {
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    margin: 0 auto; /* Center the container */
 }
 
 h1 {
@@ -61,6 +69,7 @@ input[type="submit"] {
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
+    width: 100%;
 }
 
 input[type="submit"]:hover {
@@ -68,3 +77,12 @@ input[type="submit"]:hover {
     background-color: #f1f1f1;
     color: black;
 }
+
+.error-msg {
+    color: red;
+    font-size: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+
