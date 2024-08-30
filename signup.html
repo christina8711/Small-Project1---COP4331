@@ -3,14 +3,15 @@
   <head>
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="validate.js"></script>
   </head>
   <body>
     <div class="center">
-        <form class="login-form">
-            <input type="text" name="firstname" placeholder="First Name" />
-            <input type="text" name="lastname" placeholder="Last Name" />
-            <input type="text" name="username" placeholder="Enter Username" />
-            <input type="text" name="password" placeholder="Password" />
+        <form class="login-form" id="login-form-id">
+            <input type="text" name="firstname" placeholder="First Name" id="first-name"/>
+            <input type="text" name="lastname" placeholder="Last Name" id="last-name"/>
+            <input type="text" name="username" placeholder="Enter Username" id="user-name"/>
+            <input type="text" name="password" placeholder="Password" id="pass-word"/>
             <input type="submit" value="Sign Up" />
             <a class="login-link" href="index.html">Return to Login</a>
         </form>
