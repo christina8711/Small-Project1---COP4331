@@ -11,10 +11,10 @@ class NavSidebar extends HTMLElement {
         <h3>
           <ul>
             <li class="nav-content homepage">
-              <a href="homepage.html" class="nav-content"> <imgHomepage</a>
+              <a href="homepage.html" class="nav-content">Homepage</a>
             </li>
             <li class="nav-content contacts">
-              <a href="index.html" class="nav-content">Manage Contacts</a>
+              <a href="homepage.html" class="nav-content">Manage Contacts</a>
             </li>
             <li class="nav-content logout">
               <a href="index.html" class="nav-content">Logout</a>
