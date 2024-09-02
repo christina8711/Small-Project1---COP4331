@@ -1,71 +1,128 @@
-.login-container{
-    height: 500px;
-    width: 500px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+.login-container {
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-.login-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    position: relative;
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
 }
 
 body {
-    background: radial-gradient(939px at 0.7% 2.4%, rgb(116, 106, 255) 0%, rgb(221, 221, 221) 100.2%);
-    font-family: Arial, sans-serif;
+  background: radial-gradient(
+    939px at 0.7% 2.4%,
+    rgb(116, 106, 255) 0%,
+    rgb(221, 221, 221) 100.2%
+  );
+  font-family: Arial, sans-serif;
 }
 
-.center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
 }
 
-a{
-    text-decoration: none;
-    color: black;
-    cursor: default;
-    font-weight: bold;
+.sidebar {
+  position: fixed;
+  top: 0;
+  border: #f1f1f1;
+  border-style: ridge;
+  border-radius: 1rem;
+  display: flex;
+  background-color: #746aff;
+  justify-content: center;
+  height: 100vh;
+  width: fit-content;
+}
+.sidebar-title{
+  padding-left: 2rem;  
+  padding-right: 1rem;
+  padding-top: 1.5rem;
+}
+.nav-content ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.nav-content {
+  display: flow-root;
+  padding-bottom: 1rem;
+}
+
+.nav-content a {
+  color: white;
+  font-size: 100%;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 1.5rem;
+}
+
+.nav-content a:hover {
+  color: black;
+  background-color: #9992f6;
+  padding: 1.5rem;
+}
+
+.nav-content .logout {
+  position: fixed;
+  bottom: 0;
+}
+
+.nav-content .homepage {
+  margin-bottom: 1rem;
+}
+.nav-content .contacts {
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  cursor: default;
+  font-weight: bold;
 }
 
 a:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-input{
-    border-style: solid;
-    border-color: black;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 10px;
+input {
+  border-style: solid;
+  border-color: black;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 h1 {
-    text-align: center;
-    text-wrap: wrap;
-    position: absolute;
-    bottom: 100%;
-    transform: translateY(-30px); 
+  text-align: center;
+  text-wrap: wrap;
+  position: absolute;
+  bottom: 100%;
+  transform: translateY(-30px);
 }
 
 input[type="submit"] {
-    background-color: #746aff;
-    color: white;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
+  background-color: #746aff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
 }
 
 input[type="submit"]:hover {
-    transition: 0.5s;
-    background-color: #f1f1f1;
-    color: black;
+  transition: 0.5s;
+  background-color: #f1f1f1;
+  color: black;
 }
