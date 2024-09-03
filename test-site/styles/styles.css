@@ -48,6 +48,12 @@ body {
   padding-right: 1rem;
   padding-top: 1.5rem;
 }
+.navicons {
+  width: 2rem;
+  height: 2rem;
+  fill: white;
+}
+
 .nav-content ul {
   list-style-type: none;
   padding-left: 0;
