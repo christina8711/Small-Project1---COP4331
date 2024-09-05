@@ -102,12 +102,20 @@ a:hover {
   cursor: pointer;
 }
 
-input {
-  border-style: solid;
-  border-color: black;
-  background-color: #f1f1f1;
-  border-radius: 5px;
-  padding: 10px;
+input{
+    border-style: solid;
+    border-color: black;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-container {
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    margin: 0 auto; /* Center the container */
 }
 
 h1 {
@@ -200,6 +208,33 @@ input[type="submit"]:hover {
   }
 }
 
-.pop-up{
+.pop-up1{
   transform: translateY(20vh);
 }
+
+.pop-up{
+    background-color: #746aff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    transition: 0.5s;
+    background-color: #f1f1f1;
+    color: black;
+}
+
+.error-msg {
+    color: red;
+    font-size: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+
+
