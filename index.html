@@ -3,22 +3,42 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-    <div class="center">
-        <form class="login-form" action="homepage.html" method="GET" id="form">
-            <h1>Welcome to mitski ucf!</h1>
-            <div class="input-container" id="user-name-div">
-                <input type="text" name="username" placeholder="Enter Username" id="user-name"/>
+    <div class="index-container">
+        <div class="login-page-container">
+            <div class="login-container">
+                <form class="login-form" action="homepage.html" method="GET" id="form">
+                    <h1>Welcome to mitski ucf!</h1>
+                    <div class="input-container" id="user-name-div">
+                        <input type="text" name="username" placeholder="Enter Username" id="user-name"/>
+                    </div>
+                    <div class="input-container" id="password-div">
+                        <input type="text" name="password" placeholder="Password" id="pass-word"/>
+                    </div>
+                    <div class="input-container">
+                        <input type="submit" value="Sign In"/>
+                    </div>
+                    <p>Dont have an account? <a href="signup.html">Sign Up Here</a></p>
+                </form>
             </div>
-            <div class="input-container" id="password-div">
-                <input type="text" name="password" placeholder="Password" id="pass-word"/>
+            <div class="card-example-container">
+                <div class="card">
+                    <h2>Card Example</h2>
+                    <p>This is an example of a card. It can be used to display information or images.</p>
+                </div>
+                <div class="card">
+                    <h2>Card Example</h2>
+                    <p>This is an example of a card. It can be used to display information or images.</p>
+                </div>
+                <div class="card">
+                    <h2>Card Example</h2>
+                    <p>This is an example of a card. It can be used to display information or images.</p>
+                </div>
             </div>
-            <div class="input-container">
-                <input type="submit" value="Sign In"/>
-            </div>
-            <p>Dont have an account? <a href="signup.html">Sign Up Here</a></p>
-        </form>
+        </div>
     </div>
     <script src="frontend-js/validate.js"></script>
     <script src="code.js"></script>
