@@ -6,7 +6,7 @@ class NavSidebar extends HTMLElement {
     this.innerHTML = `
  <div class="container-fluid">
   <div class="row flex-nowrap">
-    <div class="col-auto px-sm-2 px-0 " style="background-color: #746aff;">
+    <div class="col-auto px-sm-2 px-0 " style="background-color: #746aff;   z-index: 1;">
       <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100" >
         <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-5 d-none d-sm-inline">MitskiUCF.xyz</span>

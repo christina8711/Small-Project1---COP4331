@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en-US">
   <head>
     <script type="module" src="assets/components/custom-elements.js"></script>
@@ -12,6 +11,11 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <title>homepage</title>
     <meta name="author" content="Christina Nguyen" />
     <meta
@@ -25,25 +29,253 @@
         <div class="col-auto g-0">
           <nav-sidebar></nav-sidebar>
         </div>
-        <!--Contacts Search Widget-->
+        <!--Start of Contacts Card Carousel-->
         <div class="col-sm p-2 min-vh-100">
-          <div class="d-flex justify-content-center align-items-center"
-          style="min-height:100vh">
-          <div class="card text-bg-light mb-3" style="max-width: 75%">
-            <div class="card-header">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Search</span>
+          <div
+            class="d-flex justify-content-end align-items-center"
+            style="min-height: 100vh"
+          >
+            <div id="carouselExample" class="carousel slide">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="cards-wrapper">
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                        <h5 class="card-title">Full Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          Organization
+                        </h6>
+                        <p class="card-text">
+                          <b>Email:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>Phone Number:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+                    </div>
+
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                                               <h5 class="card-title">Full Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          Organization
+                        </h6>
+                        <p class="card-text">
+                          <b>Email:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>Phone Number:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+                    </div>
+
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                                              <h5 class="card-title">Full Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          Organization
+                        </h6>
+                        <p class="card-text">
+                          <b>Email:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>Phone Number:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <input type="text" class="form-control" placeholder="First and Last Name" aria-label="Contact" aria-describedby="basic-addon1">
+                <div class="carousel-item">
+                  <div class="cards-wrapper">
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                                              <h5 class="card-title">Full Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          Organization
+                        </h6>
+                        <p class="card-text">
+                          <b>Email:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>Phone Number:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+                    </div>
+
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                                               <h5 class="card-title">Full Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          Organization
+                        </h6>
+                        <p class="card-text">
+                          <b>Email:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>Phone Number:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+                    </div>
+
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                                               <h5 class="card-title">Full Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          Organization
+                        </h6>
+                        <p class="card-text">
+                          <b>Email:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>Phone Number:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="cards-wrapper">
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                                                <h5 class="card-title">Full Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          Organization
+                        </h6>
+                        <p class="card-text">
+                          <b>Email:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>Phone Number:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+                    </div>
+
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                                                <h5 class="card-title">Full Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          Organization
+                        </h6>
+                        <p class="card-text">
+                          <b>Email:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>Phone Number:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+                    </div>
+
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                                                <h5 class="card-title">Full Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          Organization
+                        </h6>
+                        <p class="card-text">
+                          <b>Email:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>Phone Number:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="card-body">
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExample"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExample"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
         </div>
+        <!--End of Contacts Card Carousel-->
+
+        <!--Start of Contacts Search Widget-->
+        <div class="col-sm p-2 min-vh-100">
+          <div
+            class="navbar navbar-light search-bar-fixed-top"
+            style="max-width: 100%; background: #746aff"
+          >
+            <div class="form-inline">
+              <div class="input-group m-3">
+                <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="First and Last Name"
+                  aria-label="Find Contact"
+                />
+                <button
+                  class="btn btn-outline-dark my-2 my-sm-0"
+                  type="submit"
+                  style="background: #9992f6"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End of Contacts Search Widget-->
       </div>
     </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
