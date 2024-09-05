@@ -44,7 +44,7 @@
                   <button
                     class="btn btn-outline-muted my-2 my-sm-0"
                     type="submit"
-                    style="padding:0;"
+                    style="padding: 0"
                   >
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"
@@ -89,36 +89,6 @@
                       <div
                         class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3"
                       >
-                        <div>
-                          <ul class="nav nav-pills">
-                            <li class="nav-item">
-                              <a
-                                aria-current="page"
-                                href="#"
-                                class="router-link-active router-link-exact-active nav-link active"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title=""
-                                data-bs-original-title="List"
-                                aria-label="List"
-                              >
-                                <i class="bx bx-list-ul"></i>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a
-                                href="#"
-                                class="nav-link"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title=""
-                                data-bs-original-title="Grid"
-                                aria-label="Grid"
-                                ><i class="bx bx-grid-alt"></i
-                              ></a>
-                            </li>
-                          </ul>
-                        </div>
                         <!--Start of Add New Modal Button-->
                         <!-- Button trigger modal -->
                         <button
@@ -155,41 +125,36 @@
                                 ></button>
                               </div>
                               <!--Enter Contact Form-->
-                              <form style="margin: 1rem">
+                              <form id="contactForm" style="margin: 1rem">
                                 <div class="form-row" style="margin: 1rem">
                                   <div class="form-group">
-                                    <label for="inputEmail4"><b>Name</b></label>
+                                    <label for="inputEmail4"><b>Name</b><em class="text-danger">*</em></label>
                                     <input
                                       type="Name"
                                       class="form-control"
-                                      id="inputName4"
+                                      id="inputName"
                                       placeholder="First and Last Name"
                                     />
                                   </div>
                                   <div class="form-group">
-                                    <label for="inputOrganization4"
-                                      ><b>Organization</b></label
+                                    <label for="inputOrganization"
+                                      ><b>Organization</b><em class="text-muted"> (Optional)</em></label
                                     >
                                     <input
                                       type="Organization"
                                       class="form-control"
-                                      id="inputOrganization4"
+                                      id="inputOrganization"
                                       placeholder="E.g. University of Central Florida"
                                     />
                                   </div>
                                   <div class="form-group">
                                     <label for="inputCountry"
-                                      ><b>Country</b></label
+                                      ><b>Country</b><em class="text-muted"> (Optional)</em></label
                                     >
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="inputCountry"
-                                      placeholder="E.g. America"
-                                    />
+                                    <countries-list></countries-list>
                                   </div>
                                   <div class="form-group">
-                                    <label for="inputEmail"><b>Email</b></label>
+                                    <label for="inputEmail"><b>Email</b><em class="text-danger">*</em></label>
                                     <input
                                       type="text"
                                       class="form-control"
@@ -199,7 +164,7 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="inputPhoneNumber"
-                                      ><b>Phone Number</b></label
+                                      ><b>Phone Number</b><em class="text-danger">*</em></label
                                     >
                                     <input
                                       type="text"
@@ -218,7 +183,7 @@
                                 >
                                   Close
                                 </button>
-                                <button type="button" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                   Save changes
                                 </button>
                               </div>
@@ -267,7 +232,7 @@
                       <div class="">
                         <div class="table-responsive">
                           <table
-                            class="table project-list-table table-nowrap align-middle table-borderless"
+                            class="table project-list-table table-nowrap align-middle table-bordered"
                           >
                             <thead>
                               <tr>
