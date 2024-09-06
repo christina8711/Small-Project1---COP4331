@@ -343,3 +343,17 @@ input[type="submit"]:hover {
     flex-grow: 1;
   }
 }
+
+
+
+.svg-icons{
+  z-index: 10000;
+}
+
+
+.mitski-invert{
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
