@@ -1,26 +1,102 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="styles/styles.css">
-</head>
-<body>
-    <div class="center">
-        <form class="login-form" action="homepage.html" method="GET" id="form">
+    <link rel="stylesheet" type="text/css" href="styles/brunostyles.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="index-container">
+      <div class="login-page-container">
+        <div class="login-container">
+          <form
+            class="login-form"
+            action="homepage.html"
+            method="GET"
+            id="form"
+          >
             <h1>Welcome to mitski ucf!</h1>
             <div class="input-container" id="user-name-div">
-                <input type="text" name="username" placeholder="Enter Username" id="user-name"/>
+              <input
+                type="text"
+                name="username"
+                placeholder="Enter Username"
+                id="user-name"
+              />
             </div>
             <div class="input-container" id="password-div">
-                <input type="text" name="password" placeholder="Password" id="pass-word"/>
+              <input
+                type="text"
+                name="password"
+                placeholder="Password"
+                id="pass-word"
+              />
             </div>
-            <div class="input-container">
-                <input type="submit" value="Sign In"/>
+            <div class="sign-in-buttons">
+              <div class="mitski-icons-buttons">
+                <img
+                  src="/assets/images/Mitski_Typing.svg"
+                  alt="mitski typing"
+                  height="65"
+                  width="69"
+                  class="svg-icons"
+                />
+                <img
+                  src="/assets/images/Mitski_ThumbsUp.svg"
+                  alt="mitski typing"
+                  height="65"
+                  width="69"
+                  class="svg-icons"
+                />
+                <img
+                  src="/assets/images/Mitski_Typing.svg"
+                  alt="mitski typing"
+                  height="65"
+                  width="69"
+                  class="mitski-invert"
+                />
+              </div>
+              <input type="submit" value="Sign In" />
             </div>
             <p>Dont have an account? <a href="signup.html">Sign Up Here</a></p>
-        </form>
+          </form>
+        </div>
+        <div class="card-example-container">
+          <div class="card-example-header">
+            <h1>Card Examples</h1>
+          </div>
+          <div class="card-index">
+            <div class="card-example-content">
+              <h2>Card Example</h2>
+              <p>
+                This is an example of a card. It can be used to display
+                information or images.
+              </p>
+            </div>
+          </div>
+          <div class="card-index">
+            <div class="card-example-content">
+              <h2>Card Example</h2>
+              <p>
+                This is an example of a card. It can be used to display
+                information or images.
+              </p>
+            </div>
+          </div>
+          <div class="card-index">
+            <div class="card-example-content">
+              <h2>Card Example</h2>
+              <p>
+                This is an example of a card. It can be used to display
+                information or images.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="frontend-js/validate.js"></script>
     <script src="code.js"></script>
-</body>
+  </body>
 </html>
