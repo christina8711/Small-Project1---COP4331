@@ -1,4 +1,5 @@
 <?php  
+    // i will get to this page later seems like brunos alr got some logic going here so i will leave it be for now 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
