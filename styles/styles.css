@@ -1,51 +1,3 @@
-html
-{
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-
-
-.index-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-}
-
-
-.login-page-container{
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-}
-
-.login-container {
-  height: 100%;
-  width: 500px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff;
-  box-sizing: border-box;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  position: relative;
-}
 body {
   background: radial-gradient(
     939px at 0.7% 2.4%,
@@ -57,13 +9,6 @@ body {
   padding: 0;
 }
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-}
 
 .sidebar {
   position: fixed;
@@ -126,56 +71,7 @@ body {
   margin-bottom: 1rem;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-  cursor: default;
-  font-weight: bold;
-}
 
-a:hover {
-  cursor: pointer;
-}
-
-input{
-    border-style: solid;
-    border-color: black;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.input-container {
-    width: 100%;
-    max-width: 400px; /* Adjust as needed */
-    margin: 0 auto; /* Center the container */
-}
-
-h1 {
-  text-align: center;
-  text-wrap: wrap;
-  position: absolute;
-  bottom: 100%;
-  transform: translateY(-30px);
-}
-
-input[type="submit"] {
-  background-color: #746aff;
-  color: white;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 16px;
-}
-
-input[type="submit"]:hover {
-  transition: 0.5s;
-  background-color: #f1f1f1;
-  color: black;
-}
 .search-bar-fixed-top {
   position: fixed;
   justify-content: center;
@@ -258,102 +154,3 @@ input[type="submit"]:hover {
     width: 100%;
 }
 
-input[type="submit"]:hover {
-    transition: 0.5s;
-    background-color: #f1f1f1;
-    color: black;
-}
-
-.error-msg {
-    color: red;
-    font-size: 12px;
-    text-align: left;
-    font-weight: bold;
-}
-
-
-.card-index{
-  display: flex;
-  height: 280px;
-  width: 250px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  transition: 0.4s ease-out;
-  position: relative;
-  left: 0px;
-}
-
-
-
-.card-example-container{
-  height: 300px;
-  width: 600px;
-  top: 60px;
-  display: flex;
-  gap: 20px;
-  flex: 2;
-  justify-content: center;
-}
-
-.card-index:hover {
-  transform: translateY(-20px);
-  transition: 0.4s ease-out;
-}
-
-.card-example-content{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-
-
-.login-page-left{
-  display: flex;
-  flex-direction: column;
-  
-}
-
-.card-example-content p{
-  font-size: 14px;
-  font-weight: bold;
-}
-
-
-@media (max-width: 1400px) {
-  .card-example-container {
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-  }
-}
-
-
-@media (max-width: 799px) {
-  .card-example-container {
-    display: none;
-  }
-  .login-page-container{
-    flex-grow: 1;
-  }
-  .login-container{
-    flex-grow: 1;
-  }
-}
-
-
-
-.svg-icons{
-  z-index: 10000;
-}
-
-
-.mitski-invert{
-  -moz-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-}
