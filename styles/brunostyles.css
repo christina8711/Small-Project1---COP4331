@@ -62,7 +62,6 @@ body {
 }
 
 a {
-  text-decoration: none;
   color: black;
   cursor: default;
   font-weight: bold;
@@ -84,8 +83,13 @@ input {
 
 .input-container {
   width: 100%;
-  max-width: 400px; /* Adjust as needed */
-  margin: 0 auto; /* Center the container */
+  max-width: 400px; 
+  margin: 0 auto; 
+}
+
+
+#password-div {
+  padding-bottom: 40px; 
 }
 
 h1 {
@@ -199,4 +203,29 @@ input[type="submit"]:hover {
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
+}
+
+.mitski-icons-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  top: 2px;
+  z-index: -1;
+  transition: 0.4s ease-out;
+  opacity: 0;
+}
+
+.sign-in-buttons{
+  position: relative;
+  z-index: 1000;
+}
+
+.sign-in-buttons:hover .mitski-icons-buttons{
+  display: flex;
+  opacity: 1;
+  transform: translateY(-50px);
+  transition: opacity 0.4s ease, 0.4s ease-out;
 }
