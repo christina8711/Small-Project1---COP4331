@@ -154,3 +154,10 @@ body {
     width: 100%;
 }
 
+.mitski-icons-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+
