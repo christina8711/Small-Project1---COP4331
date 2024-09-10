@@ -129,13 +129,13 @@ body {
 
 .carousel-item .card {
   flex: 1 1 30%;
-  width: 30rem;
+  width: 30vw;
   height: auto;
 }
 
 @media (max-width: 768px) {
   .carousel-item .card {
-    width: 20rem;
+    width: 20vw;
   }
 }
 
@@ -159,5 +159,6 @@ body {
   flex-direction: row;
   justify-content: flex-end;
 }
+
 
 
