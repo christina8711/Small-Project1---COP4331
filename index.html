@@ -12,8 +12,6 @@
         <div class="login-container">
           <form
             class="login-form"
-            action="homepage.html"
-            method="GET"
             id="form"
           >
             <h1>Welcome to mitski ucf!</h1>
@@ -33,8 +31,11 @@
                 id="pass-word"
               />
             </div>
+            <div>
+              <p id="login-status"></p>
+            </div>
             <div class="sign-in-buttons">
-              <input type="submit" value="Sign In" />
+              <input type="submit" value="Sign In" id="login-button"/>
               <div class="mitski-icons-buttons">
                 <img
                   src="/assets/images/Mitski_Typing.svg"
@@ -97,6 +98,6 @@
       </div>
     </div>
     <script src="frontend-js/validate.js"></script>
-    <script src="code.js"></script>
+    <script src="frontend-js/code.js"></script>
   </body>
 </html>
