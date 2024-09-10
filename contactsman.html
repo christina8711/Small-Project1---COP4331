@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="en-US">
   <head>
+    <script src="assets/components/contact-form.js"></script>
     <script type="module" src="assets/components/custom-elements.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -115,7 +115,7 @@
                                   class="modal-title fs-5"
                                   id="exampleModalLabel"
                                 >
-                                  Modal title
+                                  Add New Contact
                                 </h1>
                                 <button
                                   type="button"
@@ -128,9 +128,12 @@
                               <form id="contactForm" style="margin: 1rem">
                                 <div class="form-row" style="margin: 1rem">
                                   <div class="form-group">
-                                    <label for="inputEmail4"><b>Name</b><em class="text-danger">*</em></label>
+                                    <label for="inputName"
+                                      ><b>Name</b
+                                      ><em class="text-danger">*</em></label
+                                    >
                                     <input
-                                      type="Name"
+                                      type="text"
                                       class="form-control"
                                       id="inputName"
                                       placeholder="First and Last Name"
@@ -138,10 +141,13 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="inputOrganization"
-                                      ><b>Organization</b><em class="text-muted"> (Optional)</em></label
+                                      ><b>Organization</b
+                                      ><em class="text-muted">
+                                        (Optional)</em
+                                      ></label
                                     >
                                     <input
-                                      type="Organization"
+                                      type="text"
                                       class="form-control"
                                       id="inputOrganization"
                                       placeholder="E.g. University of Central Florida"
@@ -149,53 +155,91 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="inputCountry"
-                                      ><b>Country</b><em class="text-muted"> (Optional)</em></label
+                                      ><b>Country</b
+                                      ><em class="text-muted">
+                                        (Optional)</em
+                                      ></label
                                     >
                                     <countries-list></countries-list>
                                   </div>
                                   <div class="form-group">
-                                    <label for="inputEmail"><b>Email</b><em class="text-danger">*</em></label>
+                                    <label for="inputEmail"
+                                      ><b>Email</b
+                                      ><em class="text-danger">*</em></label
+                                    >
                                     <input
-                                      type="text"
+                                      type="email"
                                       class="form-control"
                                       id="inputEmail"
-                                      placeholder="E.g. Example@email.com"
+                                      placeholder="E.g. example@email.com"
                                     />
                                   </div>
                                   <div class="form-group">
                                     <label for="inputPhoneNumber"
-                                      ><b>Phone Number</b><em class="text-danger">*</em></label
+                                      ><b>Phone Number</b
+                                      ><em class="text-danger">*</em></label
                                     >
                                     <input
-                                      type="text"
+                                      type="tel"
                                       class="form-control"
                                       id="inputPhoneNumber"
                                       placeholder="XXX-XXX-XXXX"
                                     />
                                   </div>
                                 </div>
+                                <div class="modal-footer">
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                  >
+                                    Close
+                                  </button>
+                                  <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                    id="saveChangesBtn"
+                                  >
+                                    Save changes
+                                  </button>
+                                </div>
                               </form>
-                              <div class="modal-footer">
-                                <button
-                                  type="button"
-                                  class="btn btn-secondary"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Close
-                                </button>
-                                <button type="submit" class="btn btn-primary">
-                                  Save changes
-                                </button>
-                              </div>
                             </div>
                           </div>
                         </div>
                         <!--End of Add New Modal Button-->
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger">
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          id="deleteSelected"
+                        >
                           Delete
                         </button>
-
+                        <!--Toast Message after clicking delete-->
+                        <div
+                          class="toast-container position-fixed top-0 end-0 p-3"
+                        >
+                          <div
+                            id="liveToast"
+                            class="toast"
+                            role="alert"
+                            aria-live="assertive"
+                            aria-atomic="true"
+                          >
+                            <div class="toast-header">
+                              <mitski-icon2></mitski-icon2>
+                              <strong class="me-auto">Successful!</strong>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="toast"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="toast-body"></div>
+                          </div>
+                        </div>
                         <div class="dropdown">
                           <a
                             class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle"
@@ -233,6 +277,7 @@
                         <div class="table-responsive">
                           <table
                             class="table project-list-table table-nowrap align-middle table-bordered"
+                            id="contacts-table"
                           >
                             <thead>
                               <tr>
@@ -246,10 +291,10 @@
                                       title="Select All"
                                       type="checkbox"
                                       class="form-check-input"
-                                      id="contacusercheck"
+                                      id="checkAll"
                                     /><label
                                       class="form-check-label font-size-10"
-                                      for="SelectingContacts"
+                                      for="checkAll"
                                       ><span>Select All</span>
                                     </label>
                                   </div>
@@ -263,53 +308,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row" class="ps-4">
-                                  <div class="form-check font-size-16">
-                                    <input
-                                      type="checkbox"
-                                      class="form-check-input"
-                                      id="contacusercheck1"
-                                    /><label
-                                      class="form-check-label"
-                                      for="contacusercheck1"
-                                    ></label>
-                                  </div>
-                                </th>
-                                <td>N/A</td>
-                                <td>N/A</td>
-                                <td>N/A</td>
-                                <td>N/A</td>
-                                <td>N/A</td>
-                                <td>
-                                  <ul class="list-inline mb-0">
-                                    <li class="list-inline-item">
-                                      <a
-                                        href="javascript:void(0);"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Edit"
-                                        class="px-2 text-primary"
-                                        ><i
-                                          class="bx bx-pencil font-size-18"
-                                        ></i
-                                      ></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                      <a
-                                        href="javascript:void(0);"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Delete"
-                                        class="px-2 text-danger"
-                                        ><i
-                                          class="bx bx-trash-alt font-size-18"
-                                        ></i
-                                      ></a>
-                                    </li>
-                                  </ul>
-                                </td>
-                              </tr>
+                              <!-- Contacts will be dynamically inserted here -->
                             </tbody>
                           </table>
                         </div>
