@@ -10,12 +10,14 @@ form.addEventListener("submit", (e) => {
             e.preventDefault()
         }
     }
-    else {
-        if(checkLogInputs(username, password) === false) {
+    else if(checkLogInputs(username, password) === false){
             e.preventDefault()
             username.style.border = "1px solid red"
             password.style.border = "1px solid red"
-        }
+    }
+    else{
+        e.preventDefault();
+        login();
     }
 })
 

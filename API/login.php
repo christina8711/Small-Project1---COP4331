@@ -25,7 +25,12 @@
             echo json_encode($response);
         }
         else{
-            echo "Invalid username or password";
+            $response = array(
+                'user_id' => -1,
+            );
+            echo json_encode($response);
         }
+        $stmt->close();
+        $connection->close();
     }
 ?>
