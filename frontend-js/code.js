@@ -1,4 +1,4 @@
-let url = "http://localhost/COP4331/API";
+let url = "http://mitskiucf.xyz/API";
 let ext = ".php";
 
 
