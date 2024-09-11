@@ -1,23 +1,36 @@
 <?php  
-    // i will get to this page later seems like brunos alr got some logic going here so i will leave it be for now 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
+    $data = json_decode(file_get_contents("php://input"));
+    $UserID = 0;
+    $firstName = "";
+    $lastName = "";
     //Update with own database this was for my local test
-    $connection = new mysqli("localhost", "root", "", "test");
+    $connection = new mysqli("localhost", "admin", "admin", "SmallProject");
 
     if($connection->connect_error){
         die("Connection failed: " . $connection->connect_error);
     }
     else{
-        $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-        $result = $connection->query($sql);
+        $stmt = $connection->prepare("SELECT UserID FROM Users WHERE Login = ? AND Password = ?");
+        $stmt->bind_param("ss", $data->username, $data->password);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if($result->num_rows > 0){
-            echo "Login successful";
+        if( $row = $result->fetch_assoc()){
+            $user_id = $row['UserID'];
+
+            $response = array(
+                'UserID' => $user_id,
+            );
+
+            echo json_encode($response);
         }
         else{
-            echo "Login failed";
+            $response = array(
+                'UserID' => -1,
+            );
+            echo json_encode($response);
         }
+        $stmt->close();
+        $connection->close();
     }
 ?>
