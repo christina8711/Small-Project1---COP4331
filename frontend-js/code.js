@@ -25,7 +25,7 @@ login = () => {
     xhr.onreadystatechange = () => {
       if (xhr.readyState == 4 && xhr.status == 200) {
         let response = JSON.parse(xhr.responseText);
-        userID = response.userID;
+        userID = response.UserID;
         if ( userID >= 1) {
           document.getElementById("login-status").value = "Success!";
           window.location.href = "homepage.html";
