@@ -10,13 +10,13 @@
         die("Connection failed: " . $connection->connect_error);
     }
     else{
-        $stmt = $connection->prepare("SELECT UserID FROM Users WHERE Login = ? AND Password = ?");
+        $stmt = $connection->prepare("SELECT ID FROM Users WHERE Login = ? AND Password = ?");
         $stmt->bind_param("ss", $data->username, $data->password);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if( $row = $result->fetch_assoc()){
-            $user_id = $row['UserID'];
+            $user_id = $row['ID'];
 
             $response = array(
                 'UserID' => $user_id,
