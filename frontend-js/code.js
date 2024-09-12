@@ -142,3 +142,41 @@ if(document.title == "homepage") {
   readCookie();
 }
 
+function addContact()
+{
+	let contactName = document.getElementById("inputName");
+	let phonenum = document.getElementById("inputPhoneNumber");
+  let organization = document.getElementById("inputOrganization");
+  let country = document.getElementById("inputCountry");
+	let emailaddress = document.getElementById("inputEmail");
+
+  let data = {
+    contactName: contactName.value,
+    phonenum: phonenum.value,
+    organization: organization.value,
+    country: country.value,
+    emailaddress: emailaddress.value,
+  };
+
+  let json = JSON.stringify(data);
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url + "/AddContacts" + ext, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+
+  try
+  {
+    xhr.onreadystatechange = function() 
+    {
+
+      if (this.readyState == 4 && this.status == 200) 
+      {
+        document.getElementById("contact-add-status").innerHTML = "Contact has been added";
+      }
+    };
+    xhr.send(json);
+  }
+  catch(err)
+  {
+    document.getElementById("contact-add-status").innerHTML = err.message;
+  }	
+}
