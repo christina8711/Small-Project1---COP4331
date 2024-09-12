@@ -9,6 +9,12 @@
     if($connection->connect_error){
         die("Connection failed: " . $connection->connect_error);
     }
+    else if($data->username == NULL || $data->password == NULL){
+        $response = array(
+            'UserID' => -1,
+        );
+        echo json_encode($response);
+    }
     else{
         $stmt = $connection->prepare("SELECT ID FROM Users WHERE Login = ? AND Password = ?");
         $stmt->bind_param("ss", $data->username, $data->password);
