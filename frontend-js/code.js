@@ -46,16 +46,16 @@ login = () => {
 
 register = () => {
 
-	let firstname = document.getElementById("first-name").value;
-	let lastname = document.getElementById("last-name").value;
-	let username = document.getElementById("user-name").value;
-	let password = document.getElementById("pass-word").value;
+	let firstname = document.getElementById("first-name");
+	let lastname = document.getElementById("last-name");
+	let username = document.getElementById("user-name");
+	let password = document.getElementById("pass-word");
 
 	let data = {
-		username: username,
-		password: password,
-		firstname: firstname,
-		lastname: lastname,
+		username: username.value,
+		password: password.value,
+		firstname: firstname.value,
+		lastname: lastname.value,
 	};
 
 	let json = JSON.stringify(data);

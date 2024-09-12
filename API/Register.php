@@ -1,11 +1,11 @@
 <?php
     $inData = getRequestInfo();
 
-    $firstName = $inData["firstname"];
-    $lastName = $inData["lastname"];
+    $firstname = $inData["firstname"];
+    $lastame = $inData["lastname"];
     $login = $inData["username"];
     $password = $inData["password"];
-
+n
     $conn = new mysqli("localhost", "admin", "admin", "SmallProject"); 	
     if( $conn->connect_error )
 	{
@@ -27,7 +27,7 @@
 		}
 
 		$stmt = $conn->prepare("INSERT into Users (FirstName, LastName, Login, Password) VALUES(?,?,?,?)");
-		$stmt->bind_param("ssss", $firstName, $lastName, $login, $password );
+		$stmt->bind_param("ssss", $firstname, $lastname, $login, $password );
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
