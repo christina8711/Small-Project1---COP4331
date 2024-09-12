@@ -84,7 +84,7 @@ Logout = () => {
   firstName = "";
   lastName = "";
   contacts = [];
-  document.cookie = "firstName= ;expires = Thu, 01 Jan 1970 00:00:00 UTC;";
+  document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userID=" + userId + ";expires=" + "Thu, 01 Jan 1970 00:00:00 GMT";
   window.location.href = "index.html";
 };
 
@@ -180,3 +180,11 @@ function addContact()
     document.getElementById("contact-add-status").innerHTML = err.message;
   }	
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutButton = document.getElementById("logout-button");
+  if (logoutButton) {
+      logoutButton.addEventListener("click", Logout);
+  }
+});
