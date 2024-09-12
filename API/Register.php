@@ -1,9 +1,9 @@
 <?php
     $inData = getRequestInfo();
 
-    $firstName = $inData["firstName"];
-    $lastName = $inData["lastName"];
-    $login = $inData["login"];
+    $firstName = $inData["firstname"];
+    $lastName = $inData["lastname"];
+    $login = $inData["username"];
     $password = $inData["password"];
 
     $conn = new mysqli("localhost", "admin", "admin", "SmallProject"); 	

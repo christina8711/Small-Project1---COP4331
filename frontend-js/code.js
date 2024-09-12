@@ -46,43 +46,40 @@ login = () => {
 
 register = () => {
 
-	let firstName = document.getElementById("first-name");
-	let lastName = document.getElementById("last-name");
-	let username = document.getElementById("user-name");
-	let password = document.getElementById("pass-word");
+	let firstName = document.getElementById("first-name").value;
+	let lastName = document.getElementById("last-name").value;
+	let username = document.getElementById("user-name").value;
+	let password = document.getElementById("pass-word").value;
 
 	let data = {
-		username: username.value,
-		password: password.value,
-		firstName : firstName.value,
-		lastName : lastName.value,
-	  };
+		username: username,
+		password: password,
+		firstName: firstName,
+		lastName: lastName,
+	};
 
 	let json = JSON.stringify(data);
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url + "/Register" + ext, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
 
-	try{
+	try {
 		xhr.onreadystatechange = () => {
-			if (xhr.status == 409) {
-				document.getElementById("register-status").innerHTML = "User already exists";
-				return;
+			if (xhr.readyState == 4) {
+				if (xhr.status == 200) {
+					let jsonObject = JSON.parse(xhr.responseText);
+					userId = jsonObject.id;
+					document.getElementById("register-status").innerHTML = "User added";
+					window.location.href = "homepage.html";
+				} else if (xhr.status == 409) {
+					document.getElementById("register-status").innerHTML = "User already exists";
+				} else {
+					document.getElementById("register-status").innerHTML = "Error occurred during registration";
+				}
 			}
-
-		  	if (xhr.readyState == 4 && xhr.status == 200) {
-				let jsonObject = JSON.parse(xhr.responseText);
-				userId = jsonObject.id;
-				document.getElementById("register-status").innerHTML = "User added";
-				firstName = jsonObject.firstName;
-				lastName = jsonObject.lastName;	
-				window.location.href = "homepage.html";
-				return;
-		  	} 
 		};
 		xhr.send(json);
-	  }
-		catch (err) {
-			document.getElementById("register-status").value = "Error!";
-		}
+	} catch (err) {
+		document.getElementById("register-status").innerHTML = err.message;
+	}
 }

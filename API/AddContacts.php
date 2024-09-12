@@ -9,15 +9,15 @@
     $country = $inData["contry"];
 
 
-    $conn = new mysqli("localhost", "username", "password", "SmallProject"); 
+    $conn = new mysqli("localhost", "admin", "admin", "SmallProject"); 
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error);
     }
     else
     {
-
-        // reminder: add logic here to insert contact in directly
+        $stmt = $conn->prepare("INSERT into Contacts (FirstName, LastName, Phone, Email, Organization, Country) VALUES(?,?,?,?,?,?)");
+		$stmt->bind_param("ssssss", $firstName, $lastName, $phone, $email, $organization, $country);
         $stmt->execute();
 		$stmt->close();
 		$conn->close();
