@@ -128,7 +128,10 @@
                               <form id="contactForm" style="margin: 1rem">
                                 <div class="form-row" style="margin: 1rem">
                                   <div id="contact-name-div">
-                                    <label for="inputName"><b>Name</b><em class="text-danger">*</em></label>
+                                    <label for="inputName"
+                                      ><b>Name</b
+                                      ><em class="text-danger">*</em></label
+                                    >
                                     <input
                                       type="text"
                                       name="contactName"
@@ -138,7 +141,10 @@
                                     />
                                   </div>
                                   <div id="phone-num-div">
-                                    <label for="inputPhoneNumber"><b>Phone Number</b><em class="text-danger">*</em></label>
+                                    <label for="inputPhoneNumber"
+                                      ><b>Phone Number</b
+                                      ><em class="text-danger">*</em></label
+                                    >
                                     <input
                                       type="tel"
                                       name="phonenum"
@@ -148,7 +154,10 @@
                                     />
                                   </div>
                                   <div id="email-div">
-                                    <label for="inputEmail"><b>Email</b><em class="text-danger">*</em></label>
+                                    <label for="inputEmail"
+                                      ><b>Email</b
+                                      ><em class="text-danger">*</em></label
+                                    >
                                     <input
                                       type="email"
                                       name="emailaddress"
@@ -158,7 +167,12 @@
                                     />
                                   </div>
                                   <div id="organization-div">
-                                    <label for="inputOrganization"><b>Organization</b><em class="text-muted">(Optional)</em></label>
+                                    <label for="inputOrganization"
+                                      ><b>Organization</b
+                                      ><em class="text-muted"
+                                        >(Optional)</em
+                                      ></label
+                                    >
                                     <input
                                       type="text"
                                       name="organization"
@@ -168,7 +182,12 @@
                                     />
                                   </div>
                                   <div id="country-div">
-                                    <label for="inputCountry"><b>Country</b><em class="text-muted">(Optional)</em></label>
+                                    <label for="inputCountry"
+                                      ><b>Country</b
+                                      ><em class="text-muted"
+                                        >(Optional)</em
+                                      ></label
+                                    >
                                     <input
                                       type="text"
                                       name="country"
@@ -180,13 +199,23 @@
                                 </div>
                                 <!-- Status Message -->
                                 <div>
-                                  <p id="contact-add-status">Contact addition status message goes here</p>
+                                  <p id="contact-add-status">
+                                    Contact addition status message goes here
+                                  </p>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                  >
                                     Close
                                   </button>
-                                  <button type="submit" class="btn btn-primary" id="saveChangesBtn">
+                                  <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                    id="saveChangesBtn"
+                                  >
                                     Save changes
                                   </button>
                                 </div>
@@ -305,36 +334,22 @@
                   <div class="row g-0 align-items-center pb-4">
                     <div class="col-sm-6">
                       <div>
-                        <p class="mb-sm-0">Showing 1 to 10 of 57 entries</p>
+                        <p class="mb-sm-0" id="page-numbers"></p>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="float-sm-end">
-                        <ul class="pagination mb-sm-0">
-                          <li class="page-item disabled">
-                            <a href="#" class="page-link"
-                              ><i class="mdi mdi-chevron-left"></i
-                            ></a>
-                          </li>
-                          <li class="page-item active">
-                            <a href="#" class="page-link">1</a>
-                          </li>
+                        <ul class="pagination mb-sm-0" id="pagination">
                           <li class="page-item">
-                            <a href="#" class="page-link">2</a>
+                            <a href="#" class="page-link" id="prev">
+                              <i class="mdi mdi-chevron-left"></i>
+                            </a>
                           </li>
+                          <!-- Pages will be dynamically inserted here -->
                           <li class="page-item">
-                            <a href="#" class="page-link">3</a>
-                          </li>
-                          <li class="page-item">
-                            <a href="#" class="page-link">4</a>
-                          </li>
-                          <li class="page-item">
-                            <a href="#" class="page-link">5</a>
-                          </li>
-                          <li class="page-item">
-                            <a href="#" class="page-link"
-                              ><i class="mdi mdi-chevron-right"></i
-                            ></a>
+                            <a href="#" class="page-link" id="next">
+                              <i class="mdi mdi-chevron-right"></i>
+                            </a>
                           </li>
                         </ul>
                       </div>
