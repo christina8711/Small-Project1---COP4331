@@ -1,7 +1,7 @@
 let url = "http://mitskiucf.xyz/API";
 let ext = ".php";
 
-let userId = 0;
+let userId = -1;
 let firstName = "";
 let lastName = "";
 let contacts = [];
@@ -27,11 +27,14 @@ login = () => {
       console.log("XHR state:", xhr.readyState, "Status:", xhr.status); // Log XHR state and status
       if (xhr.readyState == 4 && xhr.status == 200) {
         let response = JSON.parse(xhr.responseText);
-        userID = response.UserID;
-        console.log("Login successful, UserID:", userID); // Log UserID
+        userId = response.UserID;
+        console.log("Login successful, UserID:", userId); // Log UserID
 
-        if (userID >= 1) {
+        if (userId >= 1) {
           document.getElementById("login-status").value = "Success!";
+          firstName = response.FirstName;
+          lastName = response.LastName;
+          saveCookie();
           window.location.href = "homepage.html";
           return;
         } else {
@@ -45,6 +48,47 @@ login = () => {
     document.getElementById("login-status").value = "Error!";
   }
 };
+
+
+saveCookie = () => {
+  let minutes = 20;
+  let date = new Date();
+  date.setTime(date.getTime() + (minutes * 60 * 1000));
+  document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userID=" + userId + ";expires=" + date.toGMTString();
+};
+
+readCookie = () => {
+  let data = document.cookie;
+  let splits = data.split(",");
+  for (let i = 0; i < splits.length; i++) {
+    let temp = splits[i].trim();
+    let pair = temp.split("=");
+    if (pair[0] == "firstName") {
+      firstName = pair[1];
+    } else if (pair[0] == "lastName") {
+      lastName = pair[1];
+    } else if (pair[0] == "userID") {
+      userId = parseInt(pair[1].trim());
+    }
+  }
+  console.log("Cookie data:", firstName, lastName, userId); 
+
+  if(userId < 1) {
+    window.location.href = "index.html";
+  }
+
+};
+
+Logout = () => {
+  userId = 0;
+  firstName = "";
+  lastName = "";
+  contacts = [];
+  document.cookie = "firstName= ;expires = Thu, 01 Jan 1970 00:00:00 UTC;";
+  window.location.href = "index.html";
+};
+
+
 
 register = () => {
   let firstname = document.getElementById("first-name");
@@ -92,6 +136,11 @@ register = () => {
     document.getElementById("register-status").innerHTML = err.message;
   }
 };
+
+if(document.title == "homepage") {
+  console.log("Homepage loaded");
+  readCookie();
+}
 
 function addContact()
 {
