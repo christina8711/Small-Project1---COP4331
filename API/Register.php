@@ -3,22 +3,22 @@
 
     $firstName = $inData["firstName"];
     $lastName = $inData["lastName"];
-    $username = $inData["username"];
+    $login = $inData["login"];
     $password = $inData["password"];
 
-
-    $conn = new mysqli("localhost", "username", "password", "SmallProject"); 
+    $conn = new mysqli("localhost", "admin", "admin", "SmallProject"); 	
     if( $conn->connect_error )
-    {
-        returnWithError( $conn->connect_error, 404);
-    }
-    else
-    {
-        // reminder: add here logic to check whether a username already exists in system
-        $checkstmt->execute();
+	{
+		returnWithError( $conn->connect_error, 404);
+	}
+	else
+	{
+		$checkStmt = $conn->prepare("SELECT Login FROM Users WHERE Login = ?");
+		$checkStmt->bind_param("s", $login);
+		$checkStmt->execute();
+		$checkStmt->store_result();
 
-        
-        if( $checkStmt->num_rows > 0 )
+		if( $checkStmt->num_rows > 0 )
 		{
 			$checkStmt->close();
 			$conn->close();
@@ -26,27 +26,31 @@
 			return;
 		}
 
-        // reminder: more stuff needs to b done here (inserting into users paet)
-        $stmt->close();
-        $conn->close();
-    }
-
+		$stmt = $conn->prepare("INSERT into Users (FirstName, LastName, Login, Password) VALUES(?,?,?,?)");
+		$stmt->bind_param("ssss", $firstName, $lastName, $login, $password );
+		$stmt->execute();
+		$stmt->close();
+		$conn->close();
+		returnWithError("");
+	}
 
     function getRequestInfo()
-    {
-        return json_decode(file_get_contents('php://input'), true);
-    }
+	{
+		return json_decode(file_get_contents('php://input'), true);
+	}
 
-    function sendResultInfoAsJson( $obj )
-    {
-        header('Content-type: application/json');
-        echo $obj;
-    }
+	function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
+	}
+	
+	function returnWithError( $err, $statusCode = 200)
+	{
+		http_response_code($statusCode);
+		$retValue = '{"error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
 
-    function returnWithError( $err, $statusCode = 200)
-    {
-        http_response_code($statusCode);
-        $retValue = '{"error":"' . $err . '"}';
-        sendResultInfoAsJson( $retValue );
-    }
+
 ?>
