@@ -12,60 +12,92 @@ document.addEventListener("DOMContentLoaded", () => {
   const toastLiveExample = document.getElementById("liveToast");
   const toastBody = document.querySelector("#liveToast .toast-body");
 
-  // Function to filter the contacts table based on search input
-document.getElementById("searchInput").addEventListener("keyup", function () {
-  const searchTerm = this.value.toLowerCase(); // Get the search input value and convert it to lowercase
-  const rows = document.querySelectorAll("#contacts-table tbody tr");
-  let foundMatch = false; // Track if a match was found
-
-  rows.forEach((row) => {
-    // Get the text content of each row and check if it contains the search term
-    const name = row.cells[1].textContent.toLowerCase();
-    const organization = row.cells[2].textContent.toLowerCase();
-    const country = row.cells[3].textContent.toLowerCase();
-    const email = row.cells[4].textContent.toLowerCase();
-    const phoneNumber = row.cells[5].textContent.toLowerCase();
-
-    // If any of the cell content matches the search term, show the row, otherwise hide it
-    if (
-      name.includes(searchTerm) ||
-      organization.includes(searchTerm) ||
-      country.includes(searchTerm) ||
-      email.includes(searchTerm) ||
-      phoneNumber.includes(searchTerm)
-    ) {
-      row.style.display = "";
-      foundMatch = true; // A match was found
-    } else {
-      row.style.display = "none";
-    }
-  });
-
-  // If no match was found, show the toast message
-  if (!foundMatch && searchTerm !== "") {
-    toastBody.textContent = "No contacts found!";
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-    toastBootstrap.show();
-  }
-
-  // If the search bar is cleared, reset the table
-  if (searchTerm === "") {
-    rows.forEach((row) => {
-      row.style.display = ""; // Show all rows
-    });
-
-    // Optionally, show a toast message that the search has been reset
-    toastBody.textContent = "Search reset!";
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-    toastBootstrap.show();
-  }
-});
-
   // Global variables for pagination
   let contactsArray = []; // Array to hold all contact objects
   let itemsPerPage = 5; // Number of items per page
   let currentPage = 1; // Current page number
   let selectedContacts = new Set(); // Set to store selected contacts
+
+  // Function to filter the contacts table based on search input
+  document.getElementById("searchInput").addEventListener("keyup", function () {
+    const searchTerm = this.value.toLowerCase(); // Get the search input value and convert it to lowercase
+    let foundMatch = false; // Track if a match was found
+
+    const filteredContacts = contactsArray.filter((contact) => {
+      // Check if any field in the contact object matches the search term
+      return (
+        contact.fullName.toLowerCase().includes(searchTerm) ||
+        contact.org.toLowerCase().includes(searchTerm) ||
+        contact.country.toLowerCase().includes(searchTerm) ||
+        contact.email.toLowerCase().includes(searchTerm) ||
+        contact.number.toLowerCase().includes(searchTerm)
+      );
+    });
+
+    if (filteredContacts.length > 0) {
+      foundMatch = true;
+      displayFilteredContacts(filteredContacts);
+    } else {
+      displayFilteredContacts([]); // Clear the table if no matches found
+    }
+
+    // If no match was found, show the toast message
+    if (!foundMatch && searchTerm !== "") {
+      toastBody.textContent = "No contacts found!";
+      const toastBootstrap =
+        bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+      toastBootstrap.show();
+    }
+
+    // If the search bar is cleared, reset the table
+    if (searchTerm === "") {
+      displayContacts(currentPage); // Reset to paginated display
+      toastBody.textContent = "Search reset!";
+      const toastBootstrap =
+        bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+      toastBootstrap.show();
+    }
+  });
+
+  // Function to display filtered contacts
+  function displayFilteredContacts(filteredContacts) {
+    tableBody.innerHTML = ""; // Clear existing rows
+
+    filteredContacts.forEach((contact) => {
+      const isChecked = selectedContacts.has(contact.id); // Check if the contact is selected
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <th scope="row" id="contactRow">
+          <input type="checkbox" class="checkbox" data-id="${contact.id}" ${
+        isChecked ? "checked" : ""
+      } />
+        </th>
+        <td>${contact.fullName}</td>
+        <td>${contact.org}</td>
+        <td>${contact.country}</td>
+        <td>${contact.email}</td>
+        <td>${contact.number}</td>
+        <td>
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+              <a href="javascript:void(0);" class="px-2 text-primary editcontact" data-editing="false">
+                <i class="bx bx-pencil font-size-18"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="javascript:void(0);" class="px-2 text-danger deleteRowBtn">
+                <i class="bx bx-trash-alt font-size-18"></i>
+              </a>
+            </li>
+          </ul>
+        </td>
+      `;
+      tableBody.appendChild(newRow);
+    });
+
+    handleCheckboxSelection(); // Handle checkbox selection
+    updateSelectAllCheckbox(); // Update "Select All" checkbox based on current selection
+  }
 
   // Event listener for form save changes button
   form.addEventListener("submit", (e) => {
@@ -88,11 +120,12 @@ document.getElementById("searchInput").addEventListener("keyup", function () {
 
   //Adds a new row of contact data to the table and stores it in the array
   function addContactRow() {
+    const selectedCountry = countrySelect ? countrySelect.value : "N/A";
     const contact = {
       id: Date.now(), // Generate unique ID for each contact
       fullName: fullName.value.trim(),
       org: org.value.trim() || "N/A",
-      country: countrySelect ? countrySelect.value : "N/A",
+      country: selectedCountry === "Select" ? "N/A" : selectedCountry,
       email: email.value.trim(),
       number: number.value.trim(),
     };
