@@ -27,11 +27,14 @@ login = () => {
       console.log("XHR state:", xhr.readyState, "Status:", xhr.status); // Log XHR state and status
       if (xhr.readyState == 4 && xhr.status == 200) {
         let response = JSON.parse(xhr.responseText);
-        userID = response.UserID;
-        console.log("Login successful, UserID:", userID); // Log UserID
+        userId = response.UserID;
+        console.log("Login successful, UserID:", userId); // Log UserID
 
-        if (userID >= 1) {
+        if (userId >= 1) {
           document.getElementById("login-status").value = "Success!";
+          firstName = response.FirstName;
+          lastName = response.LastName;
+          saveCookie();
           window.location.href = "homepage.html";
           return;
         } else {
@@ -59,23 +62,24 @@ readCookie = () => {
   let splits = data.split(",");
   for (let i = 0; i < splits.length; i++) {
     let temp = splits[i].trim();
-    let pair = temp[i].split("=");
+    let pair = temp.split("=");
     if (pair[0] == "firstName") {
       firstName = pair[1];
     } else if (pair[0] == "lastName") {
       lastName = pair[1];
     } else if (pair[0] == "userID") {
-      userId = pair[1];
+      userId = parseInt(pair[1].trim());
     }
   }
-  console.log("Cookie data:", firstName, lastName, userId); // Log cookie data
+  console.log("Cookie data:", firstName, lastName, userId); 
 
-  if (userId <= 0) {
+  if(userId < 1) {
     window.location.href = "index.html";
   }
+
 };
 
-doLogout = () => {
+Logout = () => {
   userId = 0;
   firstName = "";
   lastName = "";
@@ -132,3 +136,9 @@ register = () => {
     document.getElementById("register-status").innerHTML = err.message;
   }
 };
+
+if(document.title == "homepage") {
+  console.log("Homepage loaded");
+  readCookie();
+}
+
