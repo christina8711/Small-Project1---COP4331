@@ -53,6 +53,7 @@
                     </div>
                   </button>
                   <input
+                    id="searchInput"
                     type="text"
                     class="form-control"
                     placeholder="Name, Organization, Email, or Phone Number"
@@ -130,7 +131,7 @@
                                   <div id="contact-name-div">
                                     <label for="inputName"
                                       ><b>Name</b
-                                      ><em class="text-danger">*</em></label
+                                      ><em class="text-danger">(*)</em></label
                                     >
                                     <input
                                       type="text"
@@ -138,32 +139,6 @@
                                       class="form-control"
                                       id="inputName"
                                       placeholder="First and Last Name"
-                                    />
-                                  </div>
-                                  <div id="phone-num-div">
-                                    <label for="inputPhoneNumber"
-                                      ><b>Phone Number</b
-                                      ><em class="text-danger">*</em></label
-                                    >
-                                    <input
-                                      type="tel"
-                                      name="phonenum"
-                                      class="form-control"
-                                      id="inputPhoneNumber"
-                                      placeholder="XXX-XXX-XXXX"
-                                    />
-                                  </div>
-                                  <div id="email-div">
-                                    <label for="inputEmail"
-                                      ><b>Email</b
-                                      ><em class="text-danger">*</em></label
-                                    >
-                                    <input
-                                      type="email"
-                                      name="emailaddress"
-                                      class="form-control"
-                                      id="inputEmail"
-                                      placeholder="E.g. example@email.com"
                                     />
                                   </div>
                                   <div id="organization-div">
@@ -188,20 +163,34 @@
                                         >(Optional)</em
                                       ></label
                                     >
+                                    <countries-list></countries-list>
+                                  </div>
+                                  <div id="email-div">
+                                    <label for="inputEmail"
+                                      ><b>Email</b
+                                      ><em class="text-danger">(*)</em></label
+                                    >
                                     <input
-                                      type="text"
-                                      name="country"
+                                      type="email"
+                                      name="emailaddress"
                                       class="form-control"
-                                      id="inputCountry"
-                                      placeholder="Country"
+                                      id="inputEmail"
+                                      placeholder="E.g. example@email.com"
                                     />
                                   </div>
-                                </div>
-                                <!-- Status Message -->
-                                <div>
-                                  <p id="contact-add-status">
-                                    Contact addition status message goes here
-                                  </p>
+                                  <div id="phone-num-div">
+                                    <label for="inputPhoneNumber"
+                                      ><b>Phone Number</b
+                                      ><em class="text-danger">(*)</em></label
+                                    >
+                                    <input
+                                      type="tel"
+                                      name="phonenum"
+                                      class="form-control"
+                                      id="inputPhoneNumber"
+                                      placeholder="XXX-XXX-XXXX"
+                                    />
+                                  </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button

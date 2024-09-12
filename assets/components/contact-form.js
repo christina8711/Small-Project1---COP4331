@@ -12,6 +12,55 @@ document.addEventListener("DOMContentLoaded", () => {
   const toastLiveExample = document.getElementById("liveToast");
   const toastBody = document.querySelector("#liveToast .toast-body");
 
+  // Function to filter the contacts table based on search input
+document.getElementById("searchInput").addEventListener("keyup", function () {
+  const searchTerm = this.value.toLowerCase(); // Get the search input value and convert it to lowercase
+  const rows = document.querySelectorAll("#contacts-table tbody tr");
+  let foundMatch = false; // Track if a match was found
+
+  rows.forEach((row) => {
+    // Get the text content of each row and check if it contains the search term
+    const name = row.cells[1].textContent.toLowerCase();
+    const organization = row.cells[2].textContent.toLowerCase();
+    const country = row.cells[3].textContent.toLowerCase();
+    const email = row.cells[4].textContent.toLowerCase();
+    const phoneNumber = row.cells[5].textContent.toLowerCase();
+
+    // If any of the cell content matches the search term, show the row, otherwise hide it
+    if (
+      name.includes(searchTerm) ||
+      organization.includes(searchTerm) ||
+      country.includes(searchTerm) ||
+      email.includes(searchTerm) ||
+      phoneNumber.includes(searchTerm)
+    ) {
+      row.style.display = "";
+      foundMatch = true; // A match was found
+    } else {
+      row.style.display = "none";
+    }
+  });
+
+  // If no match was found, show the toast message
+  if (!foundMatch && searchTerm !== "") {
+    toastBody.textContent = "No contacts found!";
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+    toastBootstrap.show();
+  }
+
+  // If the search bar is cleared, reset the table
+  if (searchTerm === "") {
+    rows.forEach((row) => {
+      row.style.display = ""; // Show all rows
+    });
+
+    // Optionally, show a toast message that the search has been reset
+    toastBody.textContent = "Search reset!";
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+    toastBootstrap.show();
+  }
+});
+
   // Global variables for pagination
   let contactsArray = []; // Array to hold all contact objects
   let itemsPerPage = 5; // Number of items per page
