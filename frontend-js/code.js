@@ -54,8 +54,8 @@ register = () => {
 	let data = {
 		username: username,
 		password: password,
-		firstName: firstName,
-		lastName: lastName,
+		firstname: firstname,
+		lastname: lastname,
 	};
 
 	let json = JSON.stringify(data);
