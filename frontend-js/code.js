@@ -43,3 +43,46 @@ login = () => {
     }
 };
 
+
+register = () => {
+
+	let firstName = document.getElementById("first-name");
+	let lastName = document.getElementById("last-name");
+	let username = document.getElementById("user-name");
+	let password = document.getElementById("pass-word");
+
+	let data = {
+		username: username.value,
+		password: password.value,
+		firstName : firstName.value,
+		lastName : lastName.value,
+	  };
+
+	let json = JSON.stringify(data);
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url + "/Register" + ext, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+
+	try{
+		xhr.onreadystatechange = () => {
+			if (xhr.status == 409) {
+				document.getElementById("registerResult").innerHTML = "User already exists";
+				return;
+			}
+
+		  	if (xhr.readyState == 4 && xhr.status == 200) {
+				let jsonObject = JSON.parse(xhr.responseText);
+				userId = jsonObject.id;
+				document.getElementById("register-status").innerHTML = "User added";
+				firstName = jsonObject.firstName;
+				lastName = jsonObject.lastName;	
+				window.location.href = "homepage.html";
+				return;
+		  	} 
+		};
+		xhr.send(json);
+	  }
+		catch (err) {
+			document.getElementById("register-status").value = "Error!";
+		}
+}

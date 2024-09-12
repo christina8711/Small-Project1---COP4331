@@ -1,152 +1,90 @@
-const form = document.getElementById("form");
-const fname = document.getElementById("first-name");
-const lname = document.getElementById("last-name");
-const username = document.getElementById("user-name");
-const password = document.getElementById("pass-word");
+const form = document.getElementById("form")
+const fname = document.getElementById("first-name")
+const lname = document.getElementById("last-name")
+const username = document.getElementById("user-name")
+const password = document.getElementById("pass-word")
 
 form.addEventListener("submit", (e) => {
-    if (fname) { 
-        if (!checkInputs(fname, lname, username, password)) {
-            e.preventDefault(); 
-        } else {
+    if(fname) {
+        if(checkInputs(fname, lname, username, password) === false) {
+            e.preventDefault()
+        }
+        else {
             e.preventDefault();
-            doRegister(); 
+            register();
         }
-    } else if (!checkLogInputs(username, password)) { 
-        e.preventDefault(); 
-        username.style.border = "1px solid red";
-        password.style.border = "1px solid red";
-    } else {
+    }
+    else if(checkLogInputs(username, password) === false){
+            e.preventDefault()
+            username.style.border = "1px solid red"
+            password.style.border = "1px solid red"
+    }
+    else{
         e.preventDefault();
-        login(); 
+        login();
     }
-});
-
-function checkInputs(fname, lname, username, password) {
-    clearErrorMessages(); 
-
-    let isValid = true;
-
-    if (fname.value === "") {
-        showError("first-name-div", "First name cannot be blank");
-        isValid = false;
-    }
-    if (lname.value === "") {
-        showError("last-name-div", "Last name cannot be blank");
-        isValid = false;
-    }
-    if (username.value === "") {
-        showError("user-name-div", "User name cannot be blank");
-        isValid = false;
-    }
-    if (password.value === "") {
-        showError("password-div", "Password cannot be blank");
-        isValid = false;
-    }
-
-    return isValid;
-}
+})
 
 
-function checkLogInputs(username, password) {
-    clearErrorMessages(); 
-
-    let isValid = true;
-
-    if (username.value === "") {
-        showError("user-name-div", "User name cannot be blank");
-        isValid = false;
-    }
-    if (password.value === "") {
-        showError("password-div", "Password cannot be blank");
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-
-function showError(divId, message) {
-    let error = document.createElement("p");
-    error.innerHTML = message;
-    error.className = "error-msg";
-    document.getElementById(divId).appendChild(error);
-}
-
-
-function clearErrorMessages() {
+checkInputs = (fname, lname, username, password) => {
     document.querySelectorAll(".error-msg").forEach((element) => {
-        element.remove();
-    });
-}
+        element.remove()
+    })
 
-
-function doRegister() {
-    let firstName = document.getElementById("first-name").value;
-    let lastName = document.getElementById("last-name").value;
-    let username = document.getElementById("user-name").value;
-    let password = document.getElementById("pass-word").value;
-
-    if (firstName === "" || lastName === "" || username === "" || password === "") {
-        if (firstName === "") {
-            document.getElementById("registerFirstNameResult").innerHTML = "Please enter a first name";
-        }
-        if (lastName === "") {
-            document.getElementById("registerLastNameResult").innerHTML = "Please enter a last name";
-        }
-        if (username === "") {
-            document.getElementById("registerUsernameResult").innerHTML = "Please enter a username";
-        }
-        if (password === "") {
-            document.getElementById("registerPasswordResult").innerHTML = "Please enter a password";
-        }
-    } else {
-
-        document.getElementById("registerFirstNameResult").innerHTML = "";
-        document.getElementById("registerLastNameResult").innerHTML = "";
-        document.getElementById("registerUsernameResult").innerHTML = "";
-        document.getElementById("registerPasswordResult").innerHTML = "";
-        document.getElementById("registerResult").innerHTML = "";
-
-        let temp = {
-            firstName: firstName,
-            lastName: lastName,
-            login: username,
-            password: password,
-        };
-
-        let jsonPayload = JSON.stringify(temp);
-
-        let url = urlBase + '/Register.' + extension;
-
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-        try {
-            xhr.onreadystatechange = function () {
-                if (this.readyState != 4) {
-                    return;
-                }
-
-                if (this.status == 409) {
-                    document.getElementById("registerResult").innerHTML = "User already exists";
-                    return;
-                }
-
-                if (this.status == 200) {
-                    let jsonObject = JSON.parse(xhr.responseText);
-                    userId = jsonObject.id;
-                    document.getElementById("registerResult").innerHTML = "User added";
-                    firstName = jsonObject.firstName;
-                    lastName = jsonObject.lastName;
-                    saveCookie(); 
-                }
-            };
-
-            xhr.send(jsonPayload);
-        } catch (err) {
-            document.getElementById("registerResult").innerHTML = err.message;
-        }
+    let flag = true
+    if(fname.value === "") {
+        let fnameError = document.createElement("p")
+        fnameError.innerHTML = "First name cannot be blank"
+        fnameError.className = "error-msg"
+        document.getElementById("first-name-div").appendChild(fnameError)
+        flag = false
     }
+    if(lname.value === "") {
+        let lnameError = document.createElement("p")
+        lnameError.innerHTML = "Last name cannot be blank"
+        lnameError.className = "error-msg"
+        document.getElementById("last-name-div").appendChild(lnameError)
+        flag = false
+    }
+    if(username.value === "") {
+        let userError = document.createElement("p")
+        userError.innerHTML = "User name cannot be blank"
+        userError.className = "error-msg"
+        document.getElementById("user-name-div").appendChild(userError)
+        flag = false
+    }
+    if(password.value === "") {
+        let passError = document.createElement("p")
+        passError.innerHTML = "password cannot be blank"
+        passError.className = "error-msg"
+        document.getElementById("password-div").appendChild(passError)
+        flag = false
+    }
+    return flag
 }
+
+
+checkLogInputs = (username, password) => {
+    document.querySelectorAll(".error-msg").forEach((element) => {
+        element.remove()
+    })
+
+    let flag = true
+    if(username.value === "") {
+        let userError = document.createElement("p")
+        userError.innerHTML = "User name cannot be blank"
+        userError.className = "error-msg"
+        document.getElementById("user-name-div").appendChild(userError)
+        flag = false
+    }
+    if(password.value === "") {
+        let passError = document.createElement("p")
+        passError.innerHTML = "password cannot be blank"
+        passError.className = "error-msg"
+        document.getElementById("password-div").appendChild(passError)
+        flag = false
+    }
+    return flag
+}
+
+
