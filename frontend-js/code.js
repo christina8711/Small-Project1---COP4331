@@ -1,7 +1,7 @@
 let url = "http://mitskiucf.xyz/API";
 let ext = ".php";
 
-let userId = 0;
+let userId = -1;
 let firstName = "";
 let lastName = "";
 let contacts = [];
@@ -45,6 +45,46 @@ login = () => {
     document.getElementById("login-status").value = "Error!";
   }
 };
+
+
+saveCookie = () => {
+  let minutes = 20;
+  let date = new Date();
+  date.setTime(date.getTime() + (minutes * 60 * 1000));
+  document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userID=" + userId + ";expires=" + date.toGMTString();
+};
+
+readCookie = () => {
+  let data = document.cookie;
+  let splits = data.split(",");
+  for (let i = 0; i < splits.length; i++) {
+    let temp = splits[i].trim();
+    let pair = temp[i].split("=");
+    if (pair[0] == "firstName") {
+      firstName = pair[1];
+    } else if (pair[0] == "lastName") {
+      lastName = pair[1];
+    } else if (pair[0] == "userID") {
+      userId = pair[1];
+    }
+  }
+  console.log("Cookie data:", firstName, lastName, userId); // Log cookie data
+
+  if (userId <= 0) {
+    window.location.href = "index.html";
+  }
+};
+
+doLogout = () => {
+  userId = 0;
+  firstName = "";
+  lastName = "";
+  contacts = [];
+  document.cookie = "firstName= ;expires = Thu, 01 Jan 1970 00:00:00 UTC;";
+  window.location.href = "index.html";
+};
+
+
 
 register = () => {
   let firstname = document.getElementById("first-name");
