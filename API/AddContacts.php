@@ -2,8 +2,8 @@
     $inData = getRequestInfo();
 
     $contactName = $inData["contactName"];
-    $phone = $inData["phone"];
-    $email = $inData["email"];
+    $phonenum = $inData["phonenum"];
+    $emailaddress = $inData["emailaddress"];
     $organization = $inData["organization"];
     $country = $inData["contry"];
 
@@ -16,7 +16,7 @@
     else
     {
         $stmt = $conn->prepare("INSERT into Contacts (Name, Phone, Email, Organization, Country) VALUES(?,?,?,?,?)");
-		$stmt->bind_param("sssss", $contactName, $phone, $email, $organization, $country);
+		$stmt->bind_param("sssss", $contactName, $phonenum, $emailaddress, $organization, $country);
         $stmt->execute();
 		$stmt->close();
 		$conn->close();

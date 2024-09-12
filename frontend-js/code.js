@@ -128,6 +128,6 @@ function addContact()
   }
   catch(err)
   {
-    document.getElementById("contactAddResult").innerHTML = err.message;
+    document.getElementById("contact-add-status").innerHTML = err.message;
   }	
 }
