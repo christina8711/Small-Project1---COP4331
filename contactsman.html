@@ -124,14 +124,11 @@
                                   aria-label="Close"
                                 ></button>
                               </div>
-                              <!--Enter Contact Form-->
+                              <!-- Add Contact Modal -->
                               <form id="contactForm" style="margin: 1rem">
                                 <div class="form-row" style="margin: 1rem">
-                                  <div class="form-group">
-                                    <label for="inputName"
-                                      ><b>Name</b
-                                      ><em class="text-danger">*</em></label
-                                    >
+                                  <div id="contact-name-div">
+                                    <label for="inputName"><b>Name</b><em class="text-danger">*</em></label>
                                     <input
                                       type="text"
                                       class="form-control"
@@ -139,46 +136,8 @@
                                       placeholder="First and Last Name"
                                     />
                                   </div>
-                                  <div class="form-group">
-                                    <label for="inputOrganization"
-                                      ><b>Organization</b
-                                      ><em class="text-muted">
-                                        (Optional)</em
-                                      ></label
-                                    >
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="inputOrganization"
-                                      placeholder="E.g. University of Central Florida"
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputCountry"
-                                      ><b>Country</b
-                                      ><em class="text-muted">
-                                        (Optional)</em
-                                      ></label
-                                    >
-                                    <countries-list></countries-list>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputEmail"
-                                      ><b>Email</b
-                                      ><em class="text-danger">*</em></label
-                                    >
-                                    <input
-                                      type="email"
-                                      class="form-control"
-                                      id="inputEmail"
-                                      placeholder="E.g. example@email.com"
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputPhoneNumber"
-                                      ><b>Phone Number</b
-                                      ><em class="text-danger">*</em></label
-                                    >
+                                  <div id="phone-num-div">
+                                    <label for="inputPhoneNumber"><b>Phone Number</b><em class="text-danger">*</em></label>
                                     <input
                                       type="tel"
                                       class="form-control"
@@ -186,20 +145,43 @@
                                       placeholder="XXX-XXX-XXXX"
                                     />
                                   </div>
+                                  <div id="email-div">
+                                    <label for="inputEmail"><b>Email</b><em class="text-danger">*</em></label>
+                                    <input
+                                      type="email"
+                                      class="form-control"
+                                      id="inputEmail"
+                                      placeholder="E.g. example@email.com"
+                                    />
+                                  </div>
+                                  <div id="organization-div">
+                                    <label for="inputOrganization"><b>Organization</b><em class="text-muted">(Optional)</em></label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="inputOrganization"
+                                      placeholder="Organization"
+                                    />
+                                  </div>
+                                  <div id="country-div">
+                                    <label for="inputCountry"><b>Country</b><em class="text-muted">(Optional)</em></label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="inputCountry"
+                                      placeholder="Country"
+                                    />
+                                  </div>
+                                </div>
+                                <!-- Status Message -->
+                                <div>
+                                  <p id="contact-add-status">Contact addition status message goes here</p>
                                 </div>
                                 <div class="modal-footer">
-                                  <button
-                                    type="button"
-                                    class="btn btn-secondary"
-                                    data-bs-dismiss="modal"
-                                  >
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                     Close
                                   </button>
-                                  <button
-                                    type="submit"
-                                    class="btn btn-primary"
-                                    id="saveChangesBtn"
-                                  >
+                                  <button type="submit" class="btn btn-primary" id="saveChangesBtn">
                                     Save changes
                                   </button>
                                 </div>
@@ -362,6 +344,8 @@
         <!--End: Contacts Manager Widget-->
       </div>
     </div>
+    <script src="frontend-js/validate.js"></script>
+    <script src="frontend-js/code.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

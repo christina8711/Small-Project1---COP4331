@@ -4,7 +4,14 @@ const lname = document.getElementById("last-name")
 const username = document.getElementById("user-name")
 const password = document.getElementById("pass-word")
 
+let contactName = document.getElementById("inputName");
+let phonenum = document.getElementById("inputPhoneNumber");
+let organization = document.getElementById("inputOrganization");
+let country = document.getElementById("inputCountry");
+let emailaddress = document.getElementById("inputEmail");
+
 form.addEventListener("submit", (e) => {
+    // checks for registration
     if(fname) {
         if(checkInputs(fname, lname, username, password) === false) {
             e.preventDefault()
@@ -19,11 +26,51 @@ form.addEventListener("submit", (e) => {
             username.style.border = "1px solid red"
             password.style.border = "1px solid red"
     }
+    // checks to see if a contact is being added
+    else if(phonenum) { 
+        if (checkContactInputs(contactName, phonenum, organization, country, emailaddress) == false) { 
+            e.preventDefault()
+        }
+        else {
+            e.preventDefault();
+            addContact();
+        }
+    }
+    // checks for log in 
     else{
         e.preventDefault();
         login();
     }
 })
+
+checkContactInputs = (contactName, phonenum, organization, country, emailaddress) => { 
+    document.querySelectorAll(".error-msg").forEach((element) => {
+        element.remove()
+    })
+    let flag = true 
+    if(contactName.value === "") {
+        let nameError = document.createElement("p")
+        nameError.innerHTML = "Name cannot be blank"
+        nameError.className = "error-msg"
+        document.getElementById("contact-name-div").appendChild(nameError)
+        flag = false
+    }
+    if(phonenum.value === "") {
+        let phoneError = document.createElement("p")
+        phoneError.innerHTML = "Phone number cannot be blank"
+        phoneError.className = "error-msg"
+        document.getElementById("phone-num-div").appendChild(phoneError)
+        flag = false
+    }
+    if(email.value === "") {
+        let emailError = document.createElement("p")
+        emailError.innerHTML = "Email cannot be blank"
+        emailError.className = "error-msg"
+        document.getElementById("email-div").appendChild(emailError)
+        flag = false
+    }
+    return flag
+}
 
 
 checkInputs = (fname, lname, username, password) => {
