@@ -46,8 +46,8 @@ login = () => {
 
 register = () => {
 
-	let firstName = document.getElementById("first-name").value;
-	let lastName = document.getElementById("last-name").value;
+	let firstname = document.getElementById("first-name").value;
+	let lastname = document.getElementById("last-name").value;
 	let username = document.getElementById("user-name").value;
 	let password = document.getElementById("pass-word").value;
 
