@@ -66,7 +66,7 @@ register = () => {
 	try{
 		xhr.onreadystatechange = () => {
 			if (xhr.status == 409) {
-				document.getElementById("registerResult").innerHTML = "User already exists";
+				document.getElementById("register-status").innerHTML = "User already exists";
 				return;
 			}
 
