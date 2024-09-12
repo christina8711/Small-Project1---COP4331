@@ -52,10 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // If the search bar is cleared, reset the table
     if (searchTerm === "") {
       displayContacts(currentPage); // Reset to paginated display
-      toastBody.textContent = "Search reset!";
-      const toastBootstrap =
-        bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-      toastBootstrap.show();
     }
   });
 
@@ -115,6 +111,10 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("exampleModal")
       );
       modal.hide();
+      toastBody.textContent = "Contact has been added!";
+      const toastBootstrap =
+        bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+      toastBootstrap.show();
     }
   });
 
