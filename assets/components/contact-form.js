@@ -121,35 +121,44 @@ document.addEventListener("DOMContentLoaded", () => {
   //Adds a new row of contact data to the table and stores it in the array
   function addContactRow() {
     const selectedCountry = countrySelect ? countrySelect.value : "N/A";
+
+    // Create contact object with keys matching the PHP
     const contact = {
-      fullName: fullName.value.trim(),
-      org: org.value.trim() || "N/A",
+      contactName: fullName.value.trim(),
+      phonenum: number.value.trim(),
+      emailaddress: email.value.trim(),
+      organization: org.value.trim() || "N/A",
       country: selectedCountry === "Select" ? "N/A" : selectedCountry,
-      email: email.value.trim(),
-      number: number.value.trim(),
+      UserID: 1, // Assuming UserID is passed as 1 or a dynamic value
     };
 
-    contactsArray.push(contact); // Add contact to array
-
-    displayContacts(currentPage); // Display contacts based on the current page
-
-    // Using the fetch() API to send contact data to the PHP script
+    // Send contact data to PHP API using fetch
     fetch("http://mitskiucf.xyz/API/AddContacts.php", {
-      method: "POST", // Use POST method to send data
+      method: "POST",
       headers: {
-        "Content-Type": "application/json", // Specify that we're sending JSON data
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(contact), // Convert contact object to JSON string for sending
+      body: JSON.stringify(contact),
     })
-      .then((response) => response.json()) // Parsing the JSON response from PHP
-      .then((contact) => {
-        console.log("Success:", contact); // Handle the response data from PHP
-        // Log a message indicating that a fetch request will be made
-        console.log("Sending contact data to the server!");
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json(); // Expecting a JSON response from PHP
+      })
+      .then((data) => {
+        if (data.message) {
+          console.log(data.message); // Log success message
+        } else if (data.error) {
+          console.error(data.error); // Log error message
+        }
       })
       .catch((error) => {
-        console.error("Error:", error); // Handle any errors here
+        console.error("Error:", error); // Handle any errors that occur
       });
+
+    // Optionally, update UI or reset form
+    form.reset();
   }
 
   // Display contacts on the current page
