@@ -3,16 +3,31 @@
     $searchResults = "";
 	$searchCount = 0;
 
-    $conn = new mysqli("localhost", "username", "password", "SmallProject"); 
+    $conn = new mysqli("localhost", "admin", "admin", "SmallProject"); 
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error);
     }
     else
     {
-        //stuff goes here
+        $stmt = $conn->prepare("SELECT * FROM Contacts WHERE (Name like ? OR Email like ? OR Phone like ?) AND UserID=?");
+		$contactName = "%" . $inData["search"] . "%";
+		$stmt->bind_param("ssssss", $contactName, $contactName, $contactName, $contactName, $contactName, $inData["UserId"]);
+		$stmt->execute();
 
-        if( $searchCount == 0 )
+        $result = $stmt->get_result();
+
+        while($row = $result->fetch_assoc())
+		{
+			if( $searchCount > 0 )
+			{
+				$searchResults .= ",";
+			}
+			$searchCount++;
+			$searchResults .= '{"Name" : "' . $row["Name"]. '", "Phone" : "' . $row["Phone"]. '", "Email" : "' . $row["Email"]. '", "ID" : "' . $row["ID"]. '", "Organization" : "' . $row["Organization"]. '"}';
+		}
+		
+		if( $searchCount == 0 )
 		{
 			returnWithError( "No Records Found" );
 		}
@@ -20,7 +35,7 @@
 		{
 			returnWithInfo( $searchResults );
 		}
-        
+		
 		$stmt->close();
 		$conn->close();
     }
@@ -31,15 +46,15 @@
         return json_decode(file_get_contents('php://input'), true);
     }
 
-    function sendResultInfoAsJson( $obj )
-    {
-        header('Content-type: application/json');
-        echo $obj;
-    }
-
-    function returnWithError( $err)
-    {
-        $retValue = '{"error":"' . $err . '"}';
-        sendResultInfoAsJson( $retValue );
-    }
+    function returnWithError( $err )
+	{
+		$retValue = '{"id":0,"name":"","error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
+	
+	function returnWithInfo( $firstName )
+	{
+		$retValue = '{"results":[' . $Name . '],"error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
 ?>

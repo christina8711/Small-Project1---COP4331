@@ -1,21 +1,36 @@
 <?php
     $inData = getRequestInfo();
 
-    $firstName = $inData["firstName"];
-    $lastName = $inData["lastName"];
-    $phone = $inData["phone"];
-    $email = $inData["email"];
-    $organization = $inData["organization"];
-    $country = $inData["country"];
+    $contactName = $inData["contactName"];
+    $UserID = $inData["UserID"];
 
 
-    $conn = new mysqli("localhost", "username", "password", "SmallProject");
+    $conn = new mysqli("localhost", "admin", "admin", "SmallProject");
     {
         returnWithError( $conn->connect_error );
     }
     else
     {
-        //stuff goes here that i dont feel like writing rn 
+		$checkStmt = $conn->prepare("SELECT Name FROM Contacts WHERE Name = ? AND UserID = ? ");
+		$checkStmt->bind_param("ss", $contactName, $UserID);
+		$checkStmt->execute();
+		$checkStmt->store_result();
+
+		if( $checkStmt->num_rows == 0 )
+		{
+			$checkStmt->close();
+			$conn->close();
+			returnWithError("No Contact found with this information");
+			return;
+		}
+
+        $stmt = $conn->prepare("DELETE from Contacts where Name = ? AND UserID = ?");
+		$stmt->bind_param("sss", $contactName, $UserID);
+		$stmt->execute();
+		$stmt->close();
+		$conn->close();
+		returnWithError("");
+
     }
 
     function getRequestInfo()
