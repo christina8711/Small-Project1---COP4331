@@ -1,4 +1,8 @@
+
+
 document.addEventListener("DOMContentLoaded", () => {
+  let contactsArray = loadContacts(contactsArray);
+  console.log("contactsArray is ", contactsArray);
   const form = document.getElementById("contactForm");
   const fullName = document.getElementById("inputName");
   const email = document.getElementById("inputEmail");
@@ -13,10 +17,48 @@ document.addEventListener("DOMContentLoaded", () => {
   const toastBody = document.querySelector("#liveToast .toast-body");
 
   // Global variables for pagination
-  let contactsArray = []; // Array to hold all contact objects
   let itemsPerPage = 5; // Number of items per page
   let currentPage = 1; // Current page number
   let selectedContacts = new Set(); // Set to store selected contacts
+
+  function loadContacts(contactsArray) {
+    console.log("data is ", userId);
+  let data = {
+    userID: userId,
+  };
+  let json = JSON.stringify(data);
+  let xhr = new XMLHttpRequest();
+  let contactsTemp = [];
+  xhr.open("POST", url + "/ListContacts" + ext, true);
+  console.log("url is ", url + "/ListContacts" + ext);
+  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+
+  xhr.onreadystatechange = () => {
+    console.log("onreadystatechange");
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        try {
+          let response = JSON.parse(xhr.responseText);
+          let contacts = response.results;
+          contactsTemp = contacts;
+          console.log("Contacts:", contacts);
+
+          }
+         catch (error) {
+          console.error("Error parsing response:", error);
+        }
+      }
+      else{
+        console.error("Error fetching contacts:", xhr.status);
+      } 
+    }
+
+  }
+  xhr.send(json);
+  ;
+  return contactsTemp;
+  }
+
 
   // Function to filter the contacts table based on search input
   document.getElementById("searchInput").addEventListener("keyup", function () {
@@ -135,6 +177,9 @@ document.addEventListener("DOMContentLoaded", () => {
     displayContacts(currentPage); // Display contacts based on the current page
   }
 
+  
+  
+  
   // Display contacts on the current page
   function displayContacts(page) {
     // Clear existing rows

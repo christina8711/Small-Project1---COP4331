@@ -1,21 +1,21 @@
 <?php
     $inData = getRequestInfo();
 
-    $firstName = $inData["firstName"];
-    $lastName = $inData["lastName"];
-    $phone = $inData["phone"];
-    $email = $inData["email"];
-    $organization = $inData["organization"];
-    $country = $inData["country"];
+    $userID = $inData["userID"];
 
 
-    $conn = new mysqli("localhost", "username", "password", "SmallProject");
+    $conn = new mysqli("localhost", "root", "", "SmallProject");
     {
         returnWithError( $conn->connect_error );
     }
     else
     {
-        //stuff goes here that i dont feel like writing rn 
+        $stmt = $conn->prepare("DELETE FROM Contacts WHERE ID = ?"); 
+        $stmt->bind_param("s", $userID);
+        $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        returnWithError("");
     }
 
     function getRequestInfo()
