@@ -1,22 +1,37 @@
 <?php
     $inData = getRequestInfo();
 
-    $firstName = $inData["firstName"];
-    $lastName = $inData["lastName"];
-    $phone = $inData["phone"];
-    $email = $inData["email"];
+    $contactName = $inData["contactName"];
+    $phonenum = $inData["phonenum"];
+    $emailaddress = $inData["emailaddress"];
     $organization = $inData["organization"];
     $country = $inData["country"];
 
 
-    $conn = new mysqli("localhost", "username", "password", "SmallProject");
+    $conn = new mysqli("localhost", "admin", "admin", "SmallProject");
     {
         returnWithError( $conn->connect_error );
     }
     else
     {
-        //stuff goes here that i dont feel like writing rn 
-    }
+		$ret = $conn->prepare("SELECT contactName FROM Contacts WHERE ID=?");
+	        $ret->bind_param("s", $id);
+	        $ret->execute();
+	        $ret->store_result();
+
+		if( $ret->num_rows > 0){
+			$stmt = $conn->prepare("UPDATE Contacts SET contactName=?, Phone=?, Email=?, Organization=?, Country =? WHERE id=?");
+			$stmt->bind_param("ssssss", $contactName, $phonenum, $emailaddress, $country, $organization, $id);
+			$stmt->execute();
+			$stmt->close();
+			$conn->close();
+			returnWithError("");
+		}
+		else{
+			$ret->close();
+			$conn->close();
+			returnWithError("No Contact found with this ID");
+		}    }
 
     function getRequestInfo()
     {
