@@ -210,11 +210,20 @@ displayContacts = () => {
         try {
           let response = JSON.parse(xhr.responseText);
           let contacts = response.results;
+          let cards = "";
+          let slides = 0;
           console.log("Contacts:", contacts);
-          let cardCarousel = document.getElementById("cards-wrapper");
+          let cardCarousel = document.getElementById("carousel-inner");
           for (let i = 0; i < contacts.length; i++) {
             let contact = contacts[i];
-            cardCarousel.innerHTML = `
+            if(i % 3 == 0){
+              if(slides !== 0){
+                cards += `</div></div>`;
+              }
+              cards += `<div class="carousel-item ${slides=== 0 ? 'active' : ''}"><div class="cards-wrapper">`;
+              slides++;
+            }
+            cards += `
           <div class="card" style="width: 18rem">
                       <div class="card-body">
                         <h5 class="card-title">${contact.Name}</h5>
@@ -237,7 +246,9 @@ displayContacts = () => {
                       </div>
             </div>
             `;
+
           }
+          cardCarousel.innerHTML = cards;
         } catch (error) {
           console.error("Error parsing response:", error);
         }
