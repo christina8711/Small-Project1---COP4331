@@ -1,5 +1,5 @@
-async function loadContacts() {
-  let json = JSON.stringify(data);
+async function loadContacts({ data }) {
+  const json = JSON.stringify(data);
 
   const res = await fetch(url + "/ListContacts" + ext, {
     method: "POST",
@@ -13,13 +13,13 @@ async function loadContacts() {
     throw new Error(`HTTP error! status: ${res.status}`);
   }
 
-  const data = await res.json();
-  console.log("data is ", data);
+  const resData = await res.json();
+  console.log("data is ", resData);
   return data.results;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  let contactsArray = await loadContacts(contactsArray);
+  let contactsArray = await loadContacts(data);
   console.log("contactsArray is ", contactsArray);
   const form = document.getElementById("contactForm");
   const fullName = document.getElementById("inputName");
