@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     displayContacts(currentPage); // Display contacts based on the current page
 
     // Using the fetch() API to send contact data to the PHP script
-    fetch("http://mitskiucf.xyz/AddContacts.php", {
+    fetch("http://mitskiucf.xyz/API/AddContacts.php", {
       method: "POST", // Use POST method to send data
       headers: {
         "Content-Type": "application/json", // Specify that we're sending JSON data
