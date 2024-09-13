@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contactForm");
-  const fullName = document.getElementById("inputName");
+  const contactName = document.getElementById("inputName");
   const email = document.getElementById("inputEmail");
-  const number = document.getElementById("inputPhoneNumber");
-  const org = document.getElementById("inputOrganization");
+  const phonenum = document.getElementById("inputPhoneNumber");
+  const organization = document.getElementById("inputOrganization");
   const selectAll = document.getElementById("checkAll");
   const selectStatus = document.getElementsByClassName("checkbox");
-  const countrySelect = document.querySelector("countries-list select");
+  const country = document.querySelector("countries-list select");
   const tableBody = document.querySelector("#contacts-table tbody");
   const deleteBtn = document.getElementById("deleteSelected");
   const toastLiveExample = document.getElementById("liveToast");
@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const filteredContacts = contactsArray.filter((contact) => {
       // Check if any field in the contact object matches the search term
       return (
-        contact.fullName.toLowerCase().includes(searchTerm) ||
-        contact.org.toLowerCase().includes(searchTerm) ||
+        contact.contactName.toLowerCase().includes(searchTerm) ||
+        contact.organization.toLowerCase().includes(searchTerm) ||
         contact.country.toLowerCase().includes(searchTerm) ||
         contact.email.toLowerCase().includes(searchTerm) ||
-        contact.number.toLowerCase().includes(searchTerm)
+        contact.phonenum.toLowerCase().includes(searchTerm)
       );
     });
 
@@ -68,11 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
         isChecked ? "checked" : ""
       } />
         </th>
-        <td>${contact.fullName}</td>
-        <td>${contact.org}</td>
+        <td>${contact.contactName}</td>
+        <td>${contact.organization}</td>
         <td>${contact.country}</td>
         <td>${contact.email}</td>
-        <td>${contact.number}</td>
+        <td>${contact.phonenum}</td>
         <td>
           <ul class="list-inline mb-0">
             <li class="list-inline-item">
@@ -120,13 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Adds a new row of contact data to the table and stores it in the array
   function addContactRow() {
-    const selectedCountry = countrySelect ? countrySelect.value : "N/A";
+    const selectedCountry = country ? country.value : "N/A";
     const contact = {
-      fullName: fullName.value.trim(),
-      org: org.value.trim() || "N/A",
+      contactName: contactName.value.trim(),
+      organization: organization.value.trim() || "N/A",
       country: selectedCountry === "Select" ? "N/A" : selectedCountry,
       email: email.value.trim(),
-      number: number.value.trim(),
+      phonenum: phonenum.value.trim(),
     };
 
     contactsArray.push(contact); // Add contact to array
@@ -174,11 +174,11 @@ document.addEventListener("DOMContentLoaded", () => {
         isChecked ? "checked" : ""
       } />
         </th>
-        <td>${contact.fullName}</td>
-        <td>${contact.org}</td>
+        <td>${contact.contactName}</td>
+        <td>${contact.organization}</td>
         <td>${contact.country}</td>
         <td>${contact.email}</td>
-        <td>${contact.number}</td>
+        <td>${contact.phonenum}</td>
         <td>
           <ul class="list-inline mb-0">
             <li class="list-inline-item">
@@ -376,13 +376,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let isValid = true;
     //In case the inputs before were not valid and now they are.
     //Reset the border color
-    fullName.style.border = "";
+    contactName.style.border = "";
     email.style.border = "";
-    number.style.border = "";
+    phonenum.style.border = "";
 
     //If required fields are empty, change border color to red and mark invalid
-    if (fullName.value.trim() === "") {
-      fullName.style.border = "1px solid red";
+    if (contactName.value.trim() === "") {
+      contactName.style.border = "1px solid red";
       isValid = false;
     }
     //calls validateEmail function to check
@@ -391,8 +391,8 @@ document.addEventListener("DOMContentLoaded", () => {
       isValid = false;
     }
     //calls validatePhoneNumber function to check
-    if (!validatePhoneNumber(number.value)) {
-      number.style.border = "1px solid red";
+    if (!validatePhoneNumber(phonenum.value)) {
+      phonenum.style.border = "1px solid red";
       isValid = false;
     }
     //Return input status to event listener
@@ -404,8 +404,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return re.test(email);
   }
 
-  function validatePhoneNumber(number) {
+  function validatePhoneNumber(phonenum) {
     const phoneRegex = /^[0-9]{10,}$/;
-    return phoneRegex.test(number.trim());
+    return phoneRegex.test(phonenum.trim());
   }
 });
