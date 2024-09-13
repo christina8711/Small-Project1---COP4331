@@ -1,6 +1,7 @@
-async function loadContacts({ data }) {
+async function loadContacts(userId) {
+  let data = { userID: userId };
   const json = JSON.stringify(data);
-
+  console.log("data is ", data);
   const res = await fetch(url + "/ListContacts" + ext, {
     method: "POST",
     headers: {
@@ -15,11 +16,12 @@ async function loadContacts({ data }) {
 
   const resData = await res.json();
   console.log("data is ", resData);
-  return data.results;
+  return resData.results;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  let contactsArray = await loadContacts(data);
+  console.log("user id is ", userId); 
+  let contactsArray = await loadContacts(userId);
   console.log("contactsArray is ", contactsArray);
   const form = document.getElementById("contactForm");
   const fullName = document.getElementById("inputName");
@@ -39,6 +41,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   let currentPage = 1; // Current page number
   let selectedContacts = new Set(); // Set to store selected contacts
 
+
+  displayContacts(contactsArray);
   // Function to filter the contacts table based on search input
   document.getElementById("searchInput").addEventListener("keyup", function () {
     const searchTerm = this.value.toLowerCase(); // Get the search input value and convert it to lowercase
@@ -166,23 +170,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     const end = start + itemsPerPage;
 
     // Get contacts for the current page
-    const contactsToShow = contactsArray.slice(start, end);
+    //const contactsToShow = contactsArray.slice(start, end);
 
+    console.log("contacts", contactsArray);
     // Iterate over the contacts for the current page and render them
-    contactsToShow.forEach((contact) => {
-      const isChecked = selectedContacts.has(contact.id); // Check if the contact is selected
+    contactsArray.forEach((contact) => {
+      const isChecked = selectedContacts.has(contact.ID); // Check if the contact is selected
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
         <th scope="row" id="contactRow">
-          <input type="checkbox" class="checkbox" data-id="${contact.id}" ${
+          <input type="checkbox" class="checkbox" data-id="${contact.ID}" ${
         isChecked ? "checked" : ""
       } />
         </th>
-        <td>${contact.fullName}</td>
+        <td>${contact.Name}</td>
         <td>${contact.org}</td>
         <td>${contact.country}</td>
-        <td>${contact.email}</td>
-        <td>${contact.number}</td>
+        <td>${contact.Email}</td>
+        <td>${contact.Phone}</td>
         <td>
           <ul class="list-inline mb-0">
             <li class="list-inline-item">
