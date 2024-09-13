@@ -1,7 +1,25 @@
+async function loadContacts() {
+  let json = JSON.stringify(data);
 
+  const res = await fetch(url + "/ListContacts" + ext, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=utf-8",
+    },
+    body: json,
+  });
 
-document.addEventListener("DOMContentLoaded", () => {
-  let contactsArray = loadContacts(contactsArray);
+  if (res.status != 200) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
+  const data = await res.json();
+  console.log("data is ", data);
+  return data.results;
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  let contactsArray = await loadContacts(contactsArray);
   console.log("contactsArray is ", contactsArray);
   const form = document.getElementById("contactForm");
   const fullName = document.getElementById("inputName");
@@ -20,45 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let itemsPerPage = 5; // Number of items per page
   let currentPage = 1; // Current page number
   let selectedContacts = new Set(); // Set to store selected contacts
-
-  function loadContacts(contactsArray) {
-    console.log("data is ", userId);
-  let data = {
-    userID: userId,
-  };
-  let json = JSON.stringify(data);
-  let xhr = new XMLHttpRequest();
-  let contactsTemp = [];
-  xhr.open("POST", url + "/ListContacts" + ext, true);
-  console.log("url is ", url + "/ListContacts" + ext);
-  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-
-  xhr.onreadystatechange = () => {
-    console.log("onreadystatechange");
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        try {
-          let response = JSON.parse(xhr.responseText);
-          let contacts = response.results;
-          contactsTemp = contacts;
-          console.log("Contacts:", contacts);
-
-          }
-         catch (error) {
-          console.error("Error parsing response:", error);
-        }
-      }
-      else{
-        console.error("Error fetching contacts:", xhr.status);
-      } 
-    }
-
-  }
-  xhr.send(json);
-  ;
-  return contactsTemp;
-  }
-
 
   // Function to filter the contacts table based on search input
   document.getElementById("searchInput").addEventListener("keyup", function () {
@@ -177,9 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
     displayContacts(currentPage); // Display contacts based on the current page
   }
 
-  
-  
-  
   // Display contacts on the current page
   function displayContacts(page) {
     // Clear existing rows
