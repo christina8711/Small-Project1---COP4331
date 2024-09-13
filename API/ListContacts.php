@@ -3,7 +3,7 @@
     $searchResults = "";
 	$searchCount = 0;
 
-    $conn = new mysqli("localhost", "root", "", "test"); 
+    $conn = new mysqli("localhost", "admin", "admin", "test"); 
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error);
