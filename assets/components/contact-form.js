@@ -119,42 +119,38 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   //Adds a new row of contact data to the table and stores it in the array
-function addContactRow() {
-  const selectedCountry = countrySelect ? countrySelect.value : "N/A";
-  const contact = {
-    fullName: fullName.value.trim(),
-    org: org.value.trim() || "N/A",
-    country: selectedCountry === "Select" ? "N/A" : selectedCountry,
-    email: email.value.trim(),
-    number: number.value.trim(),
-  };
+  function addContactRow() {
+    const selectedCountry = countrySelect ? countrySelect.value : "N/A";
+    const contact = {
+      fullName: fullName.value.trim(),
+      org: org.value.trim() || "N/A",
+      country: selectedCountry === "Select" ? "N/A" : selectedCountry,
+      email: email.value.trim(),
+      number: number.value.trim(),
+    };
 
-  // Log the contact data before pushing to array
-  console.log("Adding contact:", contact);
+    contactsArray.push(contact); // Add contact to array
 
-  contactsArray.push(contact); // Add contact to array
+    displayContacts(currentPage); // Display contacts based on the current page
 
-  displayContacts(currentPage); // Display contacts based on the current page
-
-  // Log a message indicating that a fetch request will be made
-  console.log("Sending contact data to the server!");
-
-  // Using the fetch() API to send contact data to the PHP script
-  fetch("http://mitskiucf.xyz/AddContacts.php", {
-    method: "POST", // Use POST method to send data
-    headers: {
-      "Content-Type": "application/json", // Specify that we're sending JSON data
-    },
-    body: JSON.stringify(contact), // Convert contact object to JSON string for sending
-  })
-    .then((response) => response.json()) // Parsing the JSON response from PHP
-    .then((data) => {
-      console.log("Success:", data); // Handle the response data from PHP
+    // Using the fetch() API to send contact data to the PHP script
+    fetch("http://mitskiucf.xyz/AddContacts.php", {
+      method: "POST", // Use POST method to send data
+      headers: {
+        "Content-Type": "application/json", // Specify that we're sending JSON data
+      },
+      body: JSON.stringify(contact), // Convert contact object to JSON string for sending
     })
-    .catch((error) => {
-      console.error("Error:", error); // Handle any errors here
-    });
-}
+      .then((response) => response.json()) // Parsing the JSON response from PHP
+      .then((contact) => {
+        console.log("Success:", contact); // Handle the response data from PHP
+        // Log a message indicating that a fetch request will be made
+        console.log("Sending contact data to the server!");
+      })
+      .catch((error) => {
+        console.error("Error:", error); // Handle any errors here
+      });
+  }
 
   // Display contacts on the current page
   function displayContacts(page) {
