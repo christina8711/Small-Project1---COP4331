@@ -10,7 +10,7 @@
     }
     else
     {
-        $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ?");
+        $stmt = $conn->prepare("SELECT * FROM Contacts WHERE userID = ?");
         $stmt->bind_param("s", $inData["UserID"]);
         $stmt->execute();
         $result = $stmt->get_result();
