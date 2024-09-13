@@ -122,23 +122,22 @@ document.addEventListener("DOMContentLoaded", () => {
   function addContactRow() {
     const selectedCountry = countrySelect ? countrySelect.value : "N/A";
 
-    // Create contact object with keys matching the PHP
+    // Create contact object
     const contact = {
-      contactName: fullName.value.trim(),
-      phonenum: number.value.trim(),
-      emailaddress: email.value.trim(),
-      organization: org.value.trim() || "N/A",
+      fullName: fullName.value.trim(),
+      org: org.value.trim() || "N/A",
       country: selectedCountry === "Select" ? "N/A" : selectedCountry,
-      UserID: 1, // Assuming UserID is passed as 1 or a dynamic value
+      email: email.value.trim(),
+      number: number.value.trim(),
     };
 
     // Send contact data to PHP API using fetch
     fetch("http://mitskiucf.xyz/API/AddContacts.php", {
-      method: "POST",
+      method: "POST", // Use POST method to send data
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json", // Specify JSON content type
       },
-      body: JSON.stringify(contact),
+      body: JSON.stringify(contact), // Send contact data as JSON string
     })
       .then((response) => {
         if (!response.ok) {
@@ -147,11 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json(); // Expecting a JSON response from PHP
       })
       .then((data) => {
-        if (data.message) {
-          console.log(data.message); // Log success message
-        } else if (data.error) {
-          console.error(data.error); // Log error message
-        }
+        console.log("Success:", data); // Log success response from PHP
+        console.log("Sending contact data to the server!");
       })
       .catch((error) => {
         console.error("Error:", error); // Handle any errors that occur
