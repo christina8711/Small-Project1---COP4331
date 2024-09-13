@@ -277,6 +277,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Re-render the current page to reflect the selection change
     displayContacts(currentPage);
+    console.log("selected contacts", selectedContacts);
   });
 
   // Handle individual checkbox selection
