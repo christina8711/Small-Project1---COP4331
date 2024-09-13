@@ -152,30 +152,30 @@ document.addEventListener("DOMContentLoaded", async () => {
       country: selectedCountry === "Select" ? "N/A" : selectedCountry,
       email: email.value.trim(),
       phonenum: phonenum.value.trim(),
+      userID: userId,
     };
 
-    contactsArray.push(contact); // Add contact to array
+    
+    console.log("contact is ", contact);
 
-    displayContacts(currentPage); // Display contacts based on the current page
-
-    // Using the fetch() API to send contact data to the PHP script
-    fetch("http://mitskiucf.xyz/API/AddContacts.php", {
-      method: "POST", // Use POST method to send data
+    const res = fetch("http://localhost/Small-Project1---COP4331/API/AddContacts.php", {
+      method: "POST",
       headers: {
-        "Content-Type": "application/json", // Specify that we're sending JSON data
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(contact), // Convert contact object to JSON string for sending
-    })
-      .then((response) => response.json()) // Parsing the JSON response from PHP
-      .then((data) => {
-        console.log("Success:", data); // Handle the response data from PHP
-        // Log a message indicating that a fetch request will be made
-        console.log("Sending contact data to the server!");
-      })
-      .catch((error) => {
-        console.error("Error:", error); // Handle any errors here
-      });
-  }
+      body: JSON.stringify(contact),
+  });
+    
+    if (res.status != 200) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+  
+    const resData = res.json();
+    console.log("data is ", resData);
+    return resData.results;
+
+  displayContacts(currentPage);
+}
 
   // Display contacts on the current page
   function displayContacts(page) {
