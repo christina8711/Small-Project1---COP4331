@@ -5,7 +5,7 @@
     $phonenum = $inData["phonenum"];
     $emailaddress = $inData["emailaddress"];
     $organization = $inData["organization"];
-    $country = $inData["country"];
+    $country = $inData["contry"];
     $UserID = $inData["UserID"];
 
 
