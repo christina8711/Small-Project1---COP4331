@@ -49,12 +49,19 @@ login = () => {
   }
 };
 
-
 saveCookie = () => {
   let minutes = 20;
   let date = new Date();
-  date.setTime(date.getTime() + (minutes * 60 * 1000));
-  document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userID=" + userId + ";expires=" + date.toGMTString();
+  date.setTime(date.getTime() + minutes * 60 * 1000);
+  document.cookie =
+    "firstName=" +
+    firstName +
+    ",lastName=" +
+    lastName +
+    ",userID=" +
+    userId +
+    ";expires=" +
+    date.toGMTString();
 };
 
 readCookie = () => {
@@ -71,12 +78,11 @@ readCookie = () => {
       userId = parseInt(pair[1].trim());
     }
   }
-  console.log("Cookie data:", firstName, lastName, userId); 
+  console.log("Cookie data:", firstName, lastName, userId);
 
-  if(userId < 1) {
+  if (userId < 1) {
     window.location.href = "index.html";
   }
-
 };
 
 Logout = () => {
@@ -84,11 +90,17 @@ Logout = () => {
   firstName = "";
   lastName = "";
   contacts = [];
-  document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userID=" + userId + ";expires=" + "Thu, 01 Jan 1970 00:00:00 GMT";
+  document.cookie =
+    "firstName=" +
+    firstName +
+    ",lastName=" +
+    lastName +
+    ",userID=" +
+    userId +
+    ";expires=" +
+    "Thu, 01 Jan 1970 00:00:00 GMT";
   window.location.href = "index.html";
 };
-
-
 
 register = () => {
   let firstname = document.getElementById("first-name");
@@ -123,10 +135,12 @@ register = () => {
           window.location.href = "homepage.html";
         } else if (xhr.status == 409) {
           console.log("User already exists"); // Log if user already exists
-          document.getElementById("register-status").innerHTML = "User already exists";
+          document.getElementById("register-status").innerHTML =
+            "User already exists";
         } else {
           console.log("Registration error:", xhr.responseText); // Log any error responses
-          document.getElementById("register-status").innerHTML = "Error occurred during registration";
+          document.getElementById("register-status").innerHTML =
+            "Error occurred during registration";
         }
       }
     };
@@ -137,18 +151,20 @@ register = () => {
   }
 };
 
-if(document.title == "homepage") {
+if (document.title == "homepage") {
   console.log("Homepage loaded");
   readCookie();
+  document.addEventListener("DOMContentLoaded", () => {
+    displayContacts();
+  });
 }
 
-function addContact()
-{
-	let contactName = document.getElementById("inputName");
-	let phonenum = document.getElementById("inputPhoneNumber");
+function addContact() {
+  let contactName = document.getElementById("inputName");
+  let phonenum = document.getElementById("inputPhoneNumber");
   let organization = document.getElementById("inputOrganization");
   let country = document.getElementById("inputCountry");
-	let emailaddress = document.getElementById("inputEmail");
+  let emailaddress = document.getElementById("inputEmail");
 
   let data = {
     contactName: contactName.value,
@@ -163,28 +179,84 @@ function addContact()
   xhr.open("POST", url + "/AddContacts" + ext, true);
   xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
 
-  try
-  {
-    xhr.onreadystatechange = function() 
-    {
-
-      if (this.readyState == 4 && this.status == 200) 
-      {
-        document.getElementById("contact-add-status").innerHTML = "Contact has been added";
+  try {
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("contact-add-status").innerHTML =
+          "Contact has been added";
       }
     };
     xhr.send(json);
-  }
-  catch(err)
-  {
+  } catch (err) {
     document.getElementById("contact-add-status").innerHTML = err.message;
-  }	
+  }
 }
 
+displayContacts = () => {
+  console.log("data is ", userId);
+  let data = {
+    userID: userId,
+  };
+  let json = JSON.stringify(data);
+  let xhr = new XMLHttpRequest();
+
+  xhr.open("POST", url + "/ListContacts" + ext, true);
+
+  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        try {
+          let response = JSON.parse(xhr.responseText);
+          let contacts = response.results;
+          console.log("Contacts:", contacts);
+          let cardCarousel = document.getElementById("cards-wrapper");
+          for (let i = 0; i < contacts.length; i++) {
+            let contact = contacts[i];
+            cardCarousel.innerHTML = `
+          <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                        <h5 class="card-title">${contact.Name}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          ${contact.Organization}
+                        </h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                          ${contact.Country}
+                        </h6>
+                        <p class="card-text">
+                          <b>${contact.Email}:</b>
+                        </p>
+                        <p>N/A</p>
+                        <p class="card-text">
+                          <b>${contact.Phone}:</b>
+                        </p>
+                        <p>N/A</p>
+                        <a href="#" class="card-link text-primary">Edit</a>
+                        <a href="#" class="card-link text-danger">Delete</a>
+                      </div>
+            </div>
+            `;
+          }
+        } catch (error) {
+          console.error("Error parsing response:", error);
+        }
+      } else {
+        console.error(`Request failed. Status: ${xhr.status}`);
+      }
+    }
+  };
+
+  try {
+    xhr.send(json);
+  } catch (err) {
+    console.error("Error sending request:", err);
+  }
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.getElementById("logout-button");
   if (logoutButton) {
-      logoutButton.addEventListener("click", Logout);
+    logoutButton.addEventListener("click", Logout);
   }
 });
