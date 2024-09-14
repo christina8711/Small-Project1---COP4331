@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     console.log("contact is ", contact);
 
-    const res = fetch(url + "/AddContacts" + ext, {
+    const res = await fetch(url + "/AddContacts" + ext, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -287,9 +287,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Select or deselect all contacts in the array
     contactsArray.forEach((contact) => {
       if (isChecked) {
-        selectedContacts.add(contact.id); // Add contact ID to selected set
+        selectedContacts.add(contact.ID); // Add contact ID to selected set
       } else {
-        selectedContacts.delete(contact.id); // Remove contact ID from selected set
+        selectedContacts.delete(contact.ID); // Remove contact ID from selected set
       }
     });
 
@@ -298,12 +298,52 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("selected contacts", selectedContacts);
   });
 
+  
+  document.getElementById("contacts-table").addEventListener("change", (e) => {
+    if (e.target.classList.contains("checkbox")) {
+      const checkbox = e.target;
+      const contactId = parseInt(checkbox.getAttribute("data-id"));
+      if (checkbox.checked) {
+        selectedContacts.add(contactId);
+      } else {
+        selectedContacts.delete(contactId);
+      }
+      console.log("selected contacts", selectedContacts);
+      updateSelectAllCheckbox();
+    }
+  });
+  
+  async function deleteSelectedContacts() {
+    let data = { ID: Array.from(selectedContacts) };
+    const json = JSON.stringify(data);
+    console.log("selected data is ", json);
+    const res = await fetch(url + "/DeleteContacts" + ext, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+      },
+      body: json,
+    });
+    contactsArray = await loadContacts(userId);
+    displayContacts(contactsArray);
+  }
+
+  deleteBtn.addEventListener("click", (e) => {
+    deleteSelectedContacts();
+    toastBody.textContent = "Selected contacts deleted successfully!";
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+    toastBootstrap.show();
+  });
+
+ 
+
   // Handle individual checkbox selection
   function handleCheckboxSelection() {
     Array.from(selectStatus).forEach((checkbox) => {
+      console.log("Checkbox Element:", checkbox);
       checkbox.addEventListener("change", (e) => {
         const contactId = parseInt(checkbox.getAttribute("data-id"));
-
+        console.log("contactId is", contactId);
         if (checkbox.checked) {
           selectedContacts.add(contactId); // Add contact ID to selected set
         } else {

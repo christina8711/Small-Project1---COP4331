@@ -1,18 +1,22 @@
 <?php
     $inData = getRequestInfo();
 
-    $contactName = $inData["contactName"];
-    $UserID = $inData["UserID"];
+    $IDarray = $inData["ID"];
+    $ID = 0;
 
 
-    $conn = new mysqli("localhost", "root", "", "SmallProject");
+    $conn = new mysqli("localhost", "admin", "admin", "SmallProject");
+    if( $conn->connect_error )
     {
-        returnWithError( $conn->connect_error );
+        returnWithError( $conn->connect_error);
     }
     else
     {
-		$checkStmt = $conn->prepare("SELECT Name FROM Contacts WHERE Name = ? AND UserID = ? ");
-		$checkStmt->bind_param("ss", $contactName, $UserID);
+        foreach($IDarray as $key => $value)
+        {
+            $ID = $value;
+            $checkStmt = $conn->prepare("SELECT Name FROM Contacts WHERE ID = ? ");
+		$checkStmt->bind_param("s", $ID);
 		$checkStmt->execute();
 		$checkStmt->store_result();
 
@@ -24,12 +28,13 @@
 			return;
 		}
 
-        $stmt = $conn->prepare("DELETE from Contacts where Name = ? AND UserID = ?");
-		$stmt->bind_param("sss", $contactName, $UserID);
+        $stmt = $conn->prepare("DELETE from Contacts WHERE ID = ?");
+		$stmt->bind_param("s", $ID);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
 		returnWithError("");
+        }
 
     }
 
