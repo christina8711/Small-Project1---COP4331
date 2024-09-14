@@ -208,6 +208,7 @@ displayContacts = () => {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         try {
+          console.log("Response:", xhr.responseText);
           let response = JSON.parse(xhr.responseText);
           let contacts = response.results;
           let cards = "";
@@ -271,3 +272,9 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutButton.addEventListener("click", Logout);
   }
 });
+
+
+if (document.title == "Manage Page") {
+  console.log("Manage Page Loaded");
+  readCookie();
+}

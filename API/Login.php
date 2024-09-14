@@ -4,7 +4,7 @@
     $firstName = "";
     $lastName = "";
     //Update with own database this was for my local test
-    $connection = new mysqli("localhost", "admin", "admin", "SmallProject");
+    $connection = new mysqli("localhost", "admin", "admin", "smallproject");
 
     if($connection->connect_error){
         die("Connection failed: " . $connection->connect_error);

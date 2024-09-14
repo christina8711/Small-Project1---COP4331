@@ -5,7 +5,7 @@
     $UserID = $inData["UserID"];
 
 
-    $conn = new mysqli("localhost", "admin", "admin", "SmallProject");
+    $conn = new mysqli("localhost", "root", "", "SmallProject");
     {
         returnWithError( $conn->connect_error );
     }

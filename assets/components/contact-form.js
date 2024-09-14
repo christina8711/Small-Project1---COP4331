@@ -1,4 +1,28 @@
-document.addEventListener("DOMContentLoaded", () => {
+async function loadContacts(userId) {
+  let data = { userID: userId };
+  const json = JSON.stringify(data);
+  console.log("data is ", data);
+  const res = await fetch(url + "/ListContacts" + ext, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=utf-8",
+    },
+    body: json,
+  });
+
+  if (res.status != 200) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
+  const resData = await res.json();
+  console.log("data is ", resData);
+  return resData.results;
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("user id is ", userId); 
+  let contactsArray = await loadContacts(userId);
+  console.log("contactsArray is ", contactsArray);
   const form = document.getElementById("contactForm");
   const contactName = document.getElementById("inputName");
   const email = document.getElementById("inputEmail");
@@ -13,11 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const toastBody = document.querySelector("#liveToast .toast-body");
 
   // Global variables for pagination
-  let contactsArray = []; // Array to hold all contact objects
   let itemsPerPage = 5; // Number of items per page
   let currentPage = 1; // Current page number
   let selectedContacts = new Set(); // Set to store selected contacts
 
+
+  displayContacts(contactsArray);
   // Function to filter the contacts table based on search input
   document.getElementById("searchInput").addEventListener("keyup", function () {
     const searchTerm = this.value.toLowerCase(); // Get the search input value and convert it to lowercase
@@ -119,38 +144,31 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   //Adds a new row of contact data to the table and stores it in the array
-  function addContactRow() {
+  async function addContactRow() {
     const selectedCountry = country ? country.value : "N/A";
     const contact = {
       contactName: contactName.value.trim(),
       organization: organization.value.trim() || "N/A",
-      country: selectedCountry === "Select" ? "N/A" : selectedCountry,
       email: email.value.trim(),
       phonenum: phonenum.value.trim(),
+      userID: userId,
     };
 
-    contactsArray.push(contact); // Add contact to array
+    
+    console.log("contact is ", contact);
 
-    displayContacts(currentPage); // Display contacts based on the current page
-
-    // Using the fetch() API to send contact data to the PHP script
-    fetch("http://mitskiucf.xyz/API/AddContacts.php", {
-      method: "POST", // Use POST method to send data
+    const res = fetch(url + "/AddContacts" + ext, {
+      method: "POST",
       headers: {
-        "Content-Type": "application/json", // Specify that we're sending JSON data
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(contact), // Convert contact object to JSON string for sending
-    })
-      .then((response) => response.json()) // Parsing the JSON response from PHP
-      .then((data) => {
-        console.log("Success:", data); // Handle the response data from PHP
-        // Log a message indicating that a fetch request will be made
-        console.log("Sending contact data to the server!");
-      })
-      .catch((error) => {
-        console.error("Error:", error); // Handle any errors here
-      });
-  }
+      body: JSON.stringify(contact),
+  });
+    
+   
+  contactsArray = await loadContacts(userId);
+  displayContacts(contactsArray);
+}
 
   // Display contacts on the current page
   function displayContacts(page) {
@@ -162,48 +180,57 @@ document.addEventListener("DOMContentLoaded", () => {
     const end = start + itemsPerPage;
 
     // Get contacts for the current page
-    const contactsToShow = contactsArray.slice(start, end);
+    //const contactsToShow = contactsArray.slice(start, end);
 
+    console.log("contacts", contactsArray);
     // Iterate over the contacts for the current page and render them
-    contactsToShow.forEach((contact) => {
-      const isChecked = selectedContacts.has(contact.id); // Check if the contact is selected
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-        <th scope="row" id="contactRow">
-          <input type="checkbox" class="checkbox" data-id="${contact.id}" ${
-        isChecked ? "checked" : ""
-      } />
-        </th>
-        <td>${contact.contactName}</td>
-        <td>${contact.organization}</td>
-        <td>${contact.country}</td>
-        <td>${contact.email}</td>
-        <td>${contact.phonenum}</td>
-        <td>
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item">
-              <a href="javascript:void(0);" class="px-2 text-primary editcontact" data-editing="false">
-                <i class="bx bx-pencil font-size-18"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="javascript:void(0);" class="px-2 text-danger deleteRowBtn">
-                <i class="bx bx-trash-alt font-size-18"></i>
-              </a>
-            </li>
-          </ul>
-        </td>
+    if (contactsArray === undefined || contactsArray.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="7" class="text-center">No contacts found</td>
+        </tr>
       `;
-      tableBody.appendChild(newRow);
-    });
+    } else {
+      contactsArray.forEach((contact) => {
+        const isChecked = selectedContacts.has(contact.ID); // Check if the contact is selected
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <th scope="row" id="contactRow">
+            <input type="checkbox" class="checkbox" data-id="${contact.ID}" ${
+          isChecked ? "checked" : ""
+        } />
+          </th>
+          <td>${contact.Name}</td>
+          <td>${contact.org}</td>
+          <td>${contact.country}</td>
+          <td>${contact.Email}</td>
+          <td>${contact.Phone}</td>
+          <td>
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <a href="javascript:void(0);" class="px-2 text-primary editcontact" data-editing="false">
+                  <i class="bx bx-pencil font-size-18"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="javascript:void(0);" class="px-2 text-danger deleteRowBtn">
+                  <i class="bx bx-trash-alt font-size-18"></i>
+                </a>
+              </li>
+            </ul>
+          </td>
+        `;
+        tableBody.appendChild(newRow);
+      });
+    }
 
-    updatePagination(); // Update pagination buttons
-    handleCheckboxSelection(); // Handle checkbox selection
-    updateSelectAllCheckbox(); // Update "Select All" checkbox based on current selection
+    //updatePagination(); // Update pagination buttons
+    //handleCheckboxSelection(); // Handle checkbox selection
+    //updateSelectAllCheckbox(); // Update "Select All" checkbox based on current selection
   }
 
   // Update pagination buttons
-  function updatePagination() {
+  /*function updatePagination() {
     const pagination = document.getElementById("pagination");
     pagination.innerHTML = `
       <li class="page-item">
@@ -228,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     addPaginationListeners(); // Add event listeners to the pagination buttons
-  }
+  }*/
 
   // Add event listeners to pagination buttons
   function addPaginationListeners() {
@@ -268,6 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Re-render the current page to reflect the selection change
     displayContacts(currentPage);
+    console.log("selected contacts", selectedContacts);
   });
 
   // Handle individual checkbox selection

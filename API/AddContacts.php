@@ -3,22 +3,21 @@
 
     $contactName = $inData["contactName"];
     $phonenum = $inData["phonenum"];
-    $emailaddress = $inData["emailaddress"];
+    $emailaddress = $inData["email"];
     $organization = $inData["organization"];
-    $country = $inData["country"];
-    $UserID = $inData["UserID"];
+    $UserID = $inData["userID"];
 
 
 
-    $conn = new mysqli("localhost", "admin", "admin", "SmallProject"); 
+    $conn = new mysqli("localhost", "admin", "admin", "smallproject"); 
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error);
     }
     else
     {
-        $stmt = $conn->prepare("INSERT into Contacts (Name, Phone, Email, Organization, Country, UserID) VALUES(?,?,?,?,?,?)");
-		$stmt->bind_param("ssssss", $contactName, $phonenum, $emailaddress, $organization, $country, $UserID);
+        $stmt = $conn->prepare("INSERT INTO contacts (Name, Phone, Email, Organization, UserID) VALUES(?,?,?,?,?)");
+		$stmt->bind_param("sssss", $contactName, $phonenum, $emailaddress, $organization, $UserID);
         $stmt->execute();
 		$stmt->close();
 		$conn->close();
