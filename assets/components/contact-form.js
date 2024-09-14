@@ -149,7 +149,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const contact = {
       contactName: contactName.value.trim(),
       organization: organization.value.trim() || "N/A",
-      country: selectedCountry === "Select" ? "N/A" : selectedCountry,
       email: email.value.trim(),
       phonenum: phonenum.value.trim(),
       userID: userId,
@@ -166,15 +165,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       body: JSON.stringify(contact),
   });
     
-    if (res.status != 200) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-  
-    const resData = res.json();
-    console.log("data is ", resData);
-    return resData.results;
+   
 
-  displayContacts(currentPage);
+  displayContacts(contactsArray);
 }
 
   // Display contacts on the current page
@@ -191,45 +184,53 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     console.log("contacts", contactsArray);
     // Iterate over the contacts for the current page and render them
-    contactsArray.forEach((contact) => {
-      const isChecked = selectedContacts.has(contact.ID); // Check if the contact is selected
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-        <th scope="row" id="contactRow">
-          <input type="checkbox" class="checkbox" data-id="${contact.ID}" ${
-        isChecked ? "checked" : ""
-      } />
-        </th>
-        <td>${contact.Name}</td>
-        <td>${contact.org}</td>
-        <td>${contact.country}</td>
-        <td>${contact.Email}</td>
-        <td>${contact.Phone}</td>
-        <td>
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item">
-              <a href="javascript:void(0);" class="px-2 text-primary editcontact" data-editing="false">
-                <i class="bx bx-pencil font-size-18"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="javascript:void(0);" class="px-2 text-danger deleteRowBtn">
-                <i class="bx bx-trash-alt font-size-18"></i>
-              </a>
-            </li>
-          </ul>
-        </td>
+    if (contactsArray === undefined || contactsArray.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="7" class="text-center">No contacts found</td>
+        </tr>
       `;
-      tableBody.appendChild(newRow);
-    });
+    } else {
+      contactsArray.forEach((contact) => {
+        const isChecked = selectedContacts.has(contact.ID); // Check if the contact is selected
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <th scope="row" id="contactRow">
+            <input type="checkbox" class="checkbox" data-id="${contact.ID}" ${
+          isChecked ? "checked" : ""
+        } />
+          </th>
+          <td>${contact.Name}</td>
+          <td>${contact.org}</td>
+          <td>${contact.country}</td>
+          <td>${contact.Email}</td>
+          <td>${contact.Phone}</td>
+          <td>
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <a href="javascript:void(0);" class="px-2 text-primary editcontact" data-editing="false">
+                  <i class="bx bx-pencil font-size-18"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="javascript:void(0);" class="px-2 text-danger deleteRowBtn">
+                  <i class="bx bx-trash-alt font-size-18"></i>
+                </a>
+              </li>
+            </ul>
+          </td>
+        `;
+        tableBody.appendChild(newRow);
+      });
+    }
 
-    updatePagination(); // Update pagination buttons
-    handleCheckboxSelection(); // Handle checkbox selection
-    updateSelectAllCheckbox(); // Update "Select All" checkbox based on current selection
+    //updatePagination(); // Update pagination buttons
+    //handleCheckboxSelection(); // Handle checkbox selection
+    //updateSelectAllCheckbox(); // Update "Select All" checkbox based on current selection
   }
 
   // Update pagination buttons
-  function updatePagination() {
+  /*function updatePagination() {
     const pagination = document.getElementById("pagination");
     pagination.innerHTML = `
       <li class="page-item">
@@ -254,7 +255,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
 
     addPaginationListeners(); // Add event listeners to the pagination buttons
-  }
+  }*/
 
   // Add event listeners to pagination buttons
   function addPaginationListeners() {

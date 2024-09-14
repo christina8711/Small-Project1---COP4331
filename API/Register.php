@@ -9,7 +9,7 @@
 
     error_log("Extracted data - Firstname: $firstname, Lastname: $lastname, Login: $login"); // Log extracted variables
 
-    $conn = new mysqli("localhost", "admin", "admin", "SmallProject");
+    $conn = new mysqli("localhost", "root", "", "SmallProject");
     if ($conn->connect_error) {
         error_log("Connection failed: " . $conn->connect_error); // Log database connection error
         returnWithError($conn->connect_error, 404);
