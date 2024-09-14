@@ -31,7 +31,6 @@ login = () => {
         console.log("Login successful, UserID:", userId); // Log UserID
 
         if (userId >= 1) {
-          document.getElementById("login-status").value = "Success!";
           firstName = response.FirstName;
           lastName = response.LastName;
           saveCookie();
