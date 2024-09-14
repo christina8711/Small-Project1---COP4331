@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   //Adds a new row of contact data to the table and stores it in the array
-  function addContactRow() {
+  async function addContactRow() {
     const selectedCountry = country ? country.value : "N/A";
     const contact = {
       contactName: contactName.value.trim(),
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     console.log("contact is ", contact);
 
-    const res = fetch("http://localhost/Small-Project1---COP4331/API/AddContacts.php", {
+    const res = fetch(url + "/AddContacts" + ext, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
     
    
-
+  contactsArray = await loadContacts(userId);
   displayContacts(contactsArray);
 }
 
