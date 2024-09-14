@@ -9,7 +9,7 @@
 
 
 
-    $conn = new mysqli("localhost", "admin", "admin", "smallproject"); 
+    $conn = new mysqli("localhost", "admin", "admin", "SmallProject"); 
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error);
