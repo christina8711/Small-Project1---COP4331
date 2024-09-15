@@ -21,8 +21,7 @@ async function loadContacts(userId) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("user id is ", userId); 
-  let contactsArray = await loadContacts(userId);
-  console.log("contactsArray is ", contactsArray);
+  //let contactsArray = await loadContacts(userId);
   const form = document.getElementById("contactForm");
   const contactName = document.getElementById("inputName");
   const email = document.getElementById("inputEmail");
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let selectedContacts = new Set(); // Set to store selected contacts
 
 
-  displayContacts(contactsArray);
+  displayContacts(await loadContacts(userId));
   // Function to filter the contacts table based on search input
   
   async function searchContacts(searchTerm){
@@ -176,18 +175,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
     
    
-  contactsArray = await loadContacts(userId);
-  displayContacts(contactsArray);
+  displayContacts(await loadContacts(userId));
 }
 
   // Display contacts on the current page
-  function displayContacts(page) {
+  function displayContacts(contactsArray) {
     // Clear existing rows
     tableBody.innerHTML = "";
 
     // Calculate start and end indexes
-    const start = (page - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
+
 
     // Get contacts for the current page
     //const contactsToShow = contactsArray.slice(start, end);
@@ -332,8 +329,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
       body: json,
     });
-    contactsArray = await loadContacts(userId);
-    displayContacts(contactsArray);
+    displayContacts(await loadContacts(userId));
   }
 
   async function deleteRow(ID) {
@@ -347,8 +343,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
       body: json,
     });
-    contactsArray = await loadContacts(userId);
-    displayContacts(contactsArray);
+    displayContacts(await loadContacts(userId));
   }
 
   deleteBtn.addEventListener("click", (e) => {
@@ -368,8 +363,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
       body: json,
     });
-    contactsArray = await loadContacts(userId);
-    displayContacts(contactsArray);
+    displayContacts(await loadContacts(userId));
   }
  
 
@@ -415,7 +409,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Event listener for bulk delete button
   deleteBtn.addEventListener("click", (e) => {
     // Filter out the selected contacts from the array
-    contactsArray = contactsArray.filter(
+    /*contactsArray = contactsArray.filter(
       (contact) => !selectedContacts.has(contact.id)
     );
 
@@ -423,7 +417,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     selectedContacts.clear();
 
     // Update the display after deletion
-    displayContacts(currentPage);
+    displayContacts(currentPage);*/
     // Show the toast message after bulk deletion
     toastBody.textContent = `Selected contacts deleted successfully!`;
     const toastBootstrap =
