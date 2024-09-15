@@ -345,6 +345,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   deleteBtn.addEventListener("click", (e) => {
     deleteSelectedContacts();
+    selectedContacts.clear();
     toastBody.textContent = "Selected contacts deleted successfully!";
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
     toastBootstrap.show();
