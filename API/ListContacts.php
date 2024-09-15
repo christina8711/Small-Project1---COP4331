@@ -20,7 +20,7 @@
                 $searchResults .= ',';
 		    }
             $searchCount++;
-            $searchResults .= '{"ID":"' . $row["ID"] . '", "Name":"' . $row["Name"] . '", "Phone":"' . $row["Phone"] . '", "Email":"' . $row["Email"] . '", "Organization":"' . $row["Organization"] . '"}';
+            $searchResults .= '{"ID":"' . $row["ID"] . '", "Name":"' . $row["Name"] . '", "Phone":"' . $row["Phone"] . '", "Email":"' . $row["Email"] . '", "Organization":"' . $row["Organization"] . '", "Country":"' . $row["Country"] . '"}';
         }
         if( $searchCount == 0 ){
             returnWithError( "No Records Found" );
