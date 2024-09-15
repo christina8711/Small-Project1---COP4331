@@ -5,7 +5,7 @@
 	$searchCount = 0;
 
 
-    $conn = new mysqli("localhost", "username", "password", "SmallProject"); 
+    $conn = new mysqli("localhost", "admin", "admin", "SmallProject"); 
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error );

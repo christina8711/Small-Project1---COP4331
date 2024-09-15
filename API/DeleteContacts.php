@@ -31,10 +31,10 @@
         $stmt = $conn->prepare("DELETE from Contacts WHERE ID = ?");
 		$stmt->bind_param("s", $ID);
 		$stmt->execute();
-		$stmt->close();
+        }
+        $stmt->close();
 		$conn->close();
 		returnWithError("");
-        }
 
     }
 

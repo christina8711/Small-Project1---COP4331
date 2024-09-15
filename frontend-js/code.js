@@ -134,12 +134,8 @@ register = () => {
           window.location.href = "homepage.html";
         } else if (xhr.status == 409) {
           console.log("User already exists"); // Log if user already exists
-          document.getElementById("register-status").innerHTML =
-            "User already exists";
         } else {
           console.log("Registration error:", xhr.responseText); // Log any error responses
-          document.getElementById("register-status").innerHTML =
-            "Error occurred during registration";
         }
       }
     };

@@ -12,7 +12,7 @@
     {
         $stmt = $conn->prepare("SELECT * FROM Contacts WHERE (Name like ? OR Email like ? OR Phone like ?) AND UserID=?");
 		$contactName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ssssss", $contactName, $contactName, $contactName, $contactName, $contactName, $inData["UserId"]);
+		$stmt->bind_param("ssss", $contactName, $contactName, $contactName, $inData["userID"]);
 		$stmt->execute();
 
         $result = $stmt->get_result();
@@ -54,7 +54,13 @@
 	
 	function returnWithInfo( $firstName )
 	{
-		$retValue = '{"results":[' . $Name . '],"error":""}';
+		$retValue = '{"results":[' . $firstName . '],"error":""}';
 		sendResultInfoAsJson( $retValue );
+	}
+
+	function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
 	}
 ?>

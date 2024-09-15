@@ -6,6 +6,7 @@
     $emailaddress = $inData["Email"];
     $organization = $inData["org"];
     $id = $inData["ContactID"];
+    $country = $inData["country"];
 
     $conn = new mysqli("localhost", "admin", "admin", "SmallProject");
     if( $conn->connect_error )
@@ -20,8 +21,8 @@
 	        $ret->store_result();
 
 		if( $ret->num_rows > 0){
-			$stmt = $conn->prepare("UPDATE Contacts SET Name=?, Phone=?, Email=?, Organization=? WHERE id=?");
-			$stmt->bind_param("sssss", $contactName, $phonenum, $emailaddress, $organization, $id);
+			$stmt = $conn->prepare("UPDATE Contacts SET Name=?, Phone=?, Email=?, Organization=?, Country=? WHERE id=?");
+			$stmt->bind_param("ssssss", $contactName, $phonenum, $emailaddress, $organization, $country, $id);
 			$stmt->execute();
 			$stmt->close();
 			$conn->close();

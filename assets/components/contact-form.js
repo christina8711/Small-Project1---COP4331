@@ -44,20 +44,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   displayContacts(contactsArray);
   // Function to filter the contacts table based on search input
-  document.getElementById("searchInput").addEventListener("keyup", function () {
+  
+  async function searchContacts(searchTerm){
+    let data = { userID: userId, search: searchTerm };
+    const json = JSON.stringify(data);
+    console.log("data is ", data);
+    const res = await fetch(url + "/SearchContacts" + ext, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+      },
+      body: json,
+    });
+    const resData = await res.json();
+    console.log("data is ", resData);
+    return resData.results;
+  }
+  
+  
+  
+  
+    document.getElementById("searchInput").addEventListener("keyup", async function () {
     const searchTerm = this.value.toLowerCase(); // Get the search input value and convert it to lowercase
     let foundMatch = false; // Track if a match was found
 
-    const filteredContacts = contactsArray.filter((contact) => {
-      // Check if any field in the contact object matches the search term
-      return (
-        contact.contactName.toLowerCase().includes(searchTerm) ||
-        contact.organization.toLowerCase().includes(searchTerm) ||
-        contact.country.toLowerCase().includes(searchTerm) ||
-        contact.email.toLowerCase().includes(searchTerm) ||
-        contact.phonenum.toLowerCase().includes(searchTerm)
-      );
-    });
+    const filteredContacts = await searchContacts(searchTerm);
 
     if (filteredContacts.length > 0) {
       foundMatch = true;
@@ -89,15 +100,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
         <th scope="row" id="contactRow">
-          <input type="checkbox" class="checkbox" data-id="${contact.id}" ${
+          <input type="checkbox" class="checkbox" data-id="${contact.ID}" ${
         isChecked ? "checked" : ""
       } />
         </th>
-        <td>${contact.contactName}</td>
-        <td>${contact.organization}</td>
+        <td>${contact.Name}</td>
+        <td>${contact.Organization}</td>
         <td>${contact.country}</td>
-        <td>${contact.email}</td>
-        <td>${contact.phonenum}</td>
+        <td>${contact.Email}</td>
+        <td>${contact.Phone}</td>
         <td>
           <ul class="list-inline mb-0">
             <li class="list-inline-item">
@@ -117,7 +128,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     handleCheckboxSelection(); // Handle checkbox selection
-    updateSelectAllCheckbox(); // Update "Select All" checkbox based on current selection
   }
 
   // Event listener for form save changes button
@@ -145,13 +155,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   //Adds a new row of contact data to the table and stores it in the array
   async function addContactRow() {
-    const selectedCountry = country ? country.value : "N/A";
     const contact = {
       contactName: contactName.value.trim(),
       organization: organization.value.trim() || "N/A",
       email: email.value.trim(),
       phonenum: phonenum.value.trim(),
       userID: userId,
+      country: document.getElementById("inputCountry").value || "N/A",
     };
 
     
@@ -201,8 +211,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         } />
           </th>
           <td>${contact.Name}</td>
-          <td>${contact.org}</td>
-          <td>${contact.country}</td>
+          <td>${contact.Organization}</td>
+          <td>${contact.Country}</td>
           <td>${contact.Email}</td>
           <td>${contact.Phone}</td>
           <td>
@@ -282,20 +292,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Handle select all checkboxes
   selectAll.addEventListener("change", (e) => {
-    const isChecked = selectAll.checked;
-
-    // Select or deselect all contacts in the array
-    contactsArray.forEach((contact) => {
-      if (isChecked) {
-        selectedContacts.add(contact.ID); // Add contact ID to selected set
-      } else {
-        selectedContacts.delete(contact.ID); // Remove contact ID from selected set
+    document.querySelectorAll(".checkbox").forEach((checkbox) => {
+      checkbox.checked = e.target.checked;
+      const contactId = parseInt(checkbox.getAttribute("data-id"));
+      if(e.target.checked){
+        console.log("contactId is ", contactId);
+        selectedContacts.add(contactId);
+        console.log("selected contacts", selectedContacts);
+      }
+      else{
+        selectedContacts.delete(contactId);
+        console.log("selected contacts", selectedContacts);
       }
     });
-
-    // Re-render the current page to reflect the selection change
-    displayContacts(currentPage);
-    console.log("selected contacts", selectedContacts);
   });
 
   
@@ -309,7 +318,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         selectedContacts.delete(contactId);
       }
       console.log("selected contacts", selectedContacts);
-      updateSelectAllCheckbox();
     }
   });
   
@@ -317,6 +325,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     let data = { ID: Array.from(selectedContacts) };
     const json = JSON.stringify(data);
     console.log("selected data is ", json);
+    const res = await fetch(url + "/DeleteContacts" + ext, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+      },
+      body: json,
+    });
+    contactsArray = await loadContacts(userId);
+    displayContacts(contactsArray);
+  }
+
+  async function deleteRow(ID) {
+    let data = { ID: ID };
+    const json = JSON.stringify(data);
+    console.log("data from delete btn ", json);
     const res = await fetch(url + "/DeleteContacts" + ext, {
       method: "POST",
       headers: {
@@ -363,31 +386,22 @@ document.addEventListener("DOMContentLoaded", async () => {
           selectedContacts.delete(contactId); // Remove contact ID from selected set
         }
 
-        updateSelectAllCheckbox(); // Update "Select All" checkbox state
       });
     });
   }
 
-  // Update "Select All" checkbox state based on selected contacts
-  function updateSelectAllCheckbox() {
-    const allSelected = contactsArray.every((contact) =>
-      selectedContacts.has(contact.id)
-    );
-
-    selectAll.checked = allSelected; // Set "Select All" checkbox to checked if all contacts are selected
-  }
+ 
 
   // Event listener for individual contact delete
   document.addEventListener("click", (e) => {
     // Target individual row delete button using class "deleteRowBtn" shown in addContactRow function
     if (e.target.closest(".deleteRowBtn")) {
       const row = e.target.closest("tr");
-      const index = Array.from(tableBody.children).indexOf(row);
-      const actualIndex = (currentPage - 1) * itemsPerPage + index;
-      const contactId = contactsArray[actualIndex].id;
-
-      contactsArray.splice(actualIndex, 1); // Remove from array
-      selectedContacts.delete(contactId); // Remove from selected contacts set
+      const th = row.querySelector("th");
+      let id = th.querySelector("input").getAttribute("data-id");
+      let data = Array.isArray(id) ? id : [id];
+      console.log("data from delete btn ", data);
+      deleteRow(data);
 
       displayContacts(currentPage); // Update display
       // Show the toast message after deleting an individual row
@@ -452,6 +466,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let data = {
           ContactID: ContactID,
           Name: cells[0].textContent,
+          country: cells[2].textContent,
           Email: cells[3].textContent,
           Phone: cells[4].textContent,
           org: cells[1].textContent,
