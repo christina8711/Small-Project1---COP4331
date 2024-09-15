@@ -269,6 +269,26 @@ input[type="submit"]:hover {
     margin-left: 2.5rem;
   }
 }
+/* Landscape */
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape) {
+  .card-example-container {
+    display: none;
+  }
+  .login-page-container {
+    flex-grow: 1;
+  }
+  .login-container {
+    flex-grow: 1;
+  }
+  .login-form {
+    gap: 3px;
+  
+  }
+  .login-header {
+    font-size: larger;
+    margin-left: 2rem;
+  }
+}
 @media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
   .card-index {
     display: flex;
