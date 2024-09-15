@@ -42,47 +42,79 @@ html {
   gap: 20px;
   position: relative;
 }
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
 body {
-  background: 
-    url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg") 5% 75.06% / 80px 80px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 3.70% 24.73% / 100px 100px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 8.41% 1.88% / 120px 120px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 24.11% 37.21% / 90px 90px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-smiley-5342787.svg") 14.81% 95.93% / 70px 70px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-y2k-bug-48732.svg") 10.52% 49.01% / 100px 100px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg") 25.22% 90.39% / 80px 80px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 35.93% 16.16% / 100px 100px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 18.63% 69.55% / 120px 120px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 33.33% 75.46% / 90px 90px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-smiley-5342787.svg") 37.04% 45.14% / 70px 70px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-y2k-bug-48732.svg") 20.74% 7.01% / 100px 100px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg") 50.44% 2.47% / 80px 80px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 40.15% 97.06% / 100px 100px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 61.85% 92.78% / 120px 120px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 67.56% 45.31% / 90px 90px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-smiley-5342787.svg") 77.26% 52.51% / 70px 70px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-y2k-bug-48732.svg") 62.96% 74.33% / 100px 100px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg") 90.67% 90.23% / 80px 80px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 70.37% 17.23% / 100px 100px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 80.07% 2.88% / 120px 120px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 77.78% 98.65% / 90px 90px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-smiley-5342787.svg") 97.48% 37.85% / 70px 70px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-y2k-bug-48732.svg") 85.19% 71.90% / 100px 100px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg") 88.89% 35.87% / 80px 80px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 92.59% 4.25% / 100px 100px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 96.30% 55.46% / 120px 120px no-repeat,  
-    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 100% 66.65% / 90px 90px no-repeat,  
+  background: url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg")
+      5% 75.06% / 80px 80px no-repeat,
+    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 3.7% 24.73% /
+      100px 100px no-repeat,
+    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 8.41%
+      1.88% / 120px 120px no-repeat,
+    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 24.11%
+      37.21% / 90px 90px no-repeat,
+    url("../assets/images/y2k-svgs/noun-smiley-5342787.svg") 14.81% 95.93% /
+      70px 70px no-repeat,
+    url("../assets/images/y2k-svgs/noun-y2k-bug-48732.svg") 10.52% 49.01% /
+      100px 100px no-repeat,
+    url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg") 25.22%
+      90.39% / 80px 80px no-repeat,
+    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 35.93% 16.16% /
+      100px 100px no-repeat,
+    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 18.63%
+      69.55% / 120px 120px no-repeat,
+    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 33.33%
+      75.46% / 90px 90px no-repeat,
+    url("../assets/images/y2k-svgs/noun-smiley-5342787.svg") 37.04% 45.14% /
+      70px 70px no-repeat,
+    url("../assets/images/y2k-svgs/noun-y2k-bug-48732.svg") 20.74% 7.01% / 100px
+      100px no-repeat,
+    url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg") 50.44%
+      2.47% / 80px 80px no-repeat,
+    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 40.15% 97.06% /
+      100px 100px no-repeat,
+    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 61.85%
+      92.78% / 120px 120px no-repeat,
+    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 67.56%
+      45.31% / 90px 90px no-repeat,
+    url("../assets/images/y2k-svgs/noun-smiley-5342787.svg") 77.26% 52.51% /
+      70px 70px no-repeat,
+    url("../assets/images/y2k-svgs/noun-y2k-bug-48732.svg") 62.96% 74.33% /
+      100px 100px no-repeat,
+    url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg") 90.67%
+      90.23% / 80px 80px no-repeat,
+    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 70.37% 17.23% /
+      100px 100px no-repeat,
+    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 80.07%
+      2.88% / 120px 120px no-repeat,
+    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 77.78%
+      98.65% / 90px 90px no-repeat,
+    url("../assets/images/y2k-svgs/noun-smiley-5342787.svg") 97.48% 37.85% /
+      70px 70px no-repeat,
+    url("../assets/images/y2k-svgs/noun-y2k-bug-48732.svg") 85.19% 71.9% / 100px
+      100px no-repeat,
+    url("../assets/images/y2k-svgs/noun-decorative-star-6905039.svg") 88.89%
+      35.87% / 80px 80px no-repeat,
+    url("../assets/images/y2k-svgs/noun-galaxy-star-7137022.svg") 92.59% 4.25% /
+      100px 100px no-repeat,
+    url("../assets/images/y2k-svgs/noun-nokia-cell-phone-6966015.svg") 96.3%
+      55.46% / 120px 120px no-repeat,
+    url("../assets/images/y2k-svgs/noun-retro-computer-6966014.svg") 100% 66.65% /
+      90px 90px no-repeat,
     radial-gradient(
-      939px at 0.7% 2.4%, 
-      rgb(116, 106, 255) 0%, 
+      939px at 0.7% 2.4%,
+      rgb(116, 106, 255) 0%,
       rgb(221, 221, 221) 100.2%
     );
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
-
-
 
 .center {
   display: flex;
@@ -224,6 +256,71 @@ input[type="submit"]:hover {
   }
   .login-container {
     flex-grow: 1;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../assets/images/Nokia-phone3.jpg");
+  }
+  .login-form {
+    margin-bottom: 13rem;
+    gap: 3px;
+  }
+  .login-header {
+    font-size: large;
+    margin-left: 2.5rem;
+  }
+}
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  .card-index {
+    display: flex;
+    height: 410px;
+    width: 200px;
+    border-radius: 10px;
+    transition: 0.4s ease-out;
+    position: relative;
+    left: 0px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  .card-example-container {
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+  }
+  .card-header {
+    margin-top: 6rem;
+  }
+  .card-text {
+    display: none;
+  }
+  .card-text2 {
+    display: none;
+  }
+}
+
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .card-example-container {
+    display: none;
+  }
+  .login-page-container {
+    flex-grow: 1;
+  }
+  .login-container {
+    flex-grow: 1;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+    background-image: url("../assets/images/Nokia-phone3.jpg");
+  }
+  .login-form {
+    margin-bottom: 13rem;
+    gap: 3px;
+  }
+  .login-header {
+    font-size: large;
+    margin-left: 2.5rem;
   }
 }
 
@@ -271,4 +368,16 @@ input[type="submit"]:hover {
 }
 .card-3 {
   background-image: url("../assets/images/Nokia-phone3.jpg");
+}
+.card-header {
+  margin-top: 5rem;
+}
+.card-text {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.card-text2 {
+  margin-top: 2.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
