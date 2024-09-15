@@ -21,7 +21,6 @@ async function loadContacts(userId) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("user id is ", userId); 
-  //let contactsArray = await loadContacts(userId);
   const form = document.getElementById("contactForm");
   const contactName = document.getElementById("inputName");
   const email = document.getElementById("inputEmail");
@@ -69,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const filteredContacts = await searchContacts(searchTerm);
 
-    if (filteredContacts.length > 0) {
+    if (filteredContacts != undefined && filteredContacts.length > 0) {
       foundMatch = true;
       displayFilteredContacts(filteredContacts);
     } else {
@@ -86,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // If the search bar is cleared, reset the table
     if (searchTerm === "") {
-      displayContacts(currentPage); // Reset to paginated display
+      displayContacts(await loadContacts(userId)); // Reset to paginated display
     }
   });
 
@@ -231,9 +230,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    //updatePagination(); // Update pagination buttons
-    //handleCheckboxSelection(); // Handle checkbox selection
-    //updateSelectAllCheckbox(); // Update "Select All" checkbox based on current selection
+
   }
 
   // Update pagination buttons
@@ -408,17 +405,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Event listener for bulk delete button
   deleteBtn.addEventListener("click", (e) => {
-    // Filter out the selected contacts from the array
-    /*contactsArray = contactsArray.filter(
-      (contact) => !selectedContacts.has(contact.id)
-    );
-
-    // Clear the selected contacts set
-    selectedContacts.clear();
-
-    // Update the display after deletion
-    displayContacts(currentPage);*/
-    // Show the toast message after bulk deletion
     toastBody.textContent = `Selected contacts deleted successfully!`;
     const toastBootstrap =
       bootstrap.Toast.getOrCreateInstance(toastLiveExample);
