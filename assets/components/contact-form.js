@@ -335,6 +335,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     toastBootstrap.show();
   });
 
+  async function updateRow(data) {
+    const json = JSON.stringify(data);
+    console.log("data is ", json);
+    const res = await fetch(url + "/UpdatesContacts" + ext, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+      },
+      body: json,
+    });
+    contactsArray = await loadContacts(userId);
+    displayContacts(contactsArray);
+  }
  
 
   // Handle individual checkbox selection
@@ -410,6 +423,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (editButton) {
       const row = editButton.closest("tr");
       const cells = row.querySelectorAll("td");
+      const th = row.querySelector("th");
+      const ContactID = th.querySelector("input").getAttribute("data-id");
 
       // Check if the row is in edit mode
       const isEditing = editButton.getAttribute("data-editing") === "true";
@@ -432,6 +447,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (isEditing) {
         editButton.innerHTML = '<i class="bx bx-pencil font-size-18"></i>';
         editButton.setAttribute("data-editing", "false");
+        console.log("row is ", row);
+        console.log("data-id is ", ContactID);
+        let data = {
+          ContactID: ContactID,
+          Name: cells[0].textContent,
+          Email: cells[3].textContent,
+          Phone: cells[4].textContent,
+          org: cells[1].textContent,
+        };
+        console.log("data is ", data);  
+        updateRow(data);
       } else {
         editButton.innerHTML = '<i class="bx bx-save font-size-18"></i>';
         editButton.setAttribute("data-editing", "true");
