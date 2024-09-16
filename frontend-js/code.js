@@ -205,50 +205,53 @@ displayContacts = () => {
         try {
           console.log("Response:", xhr.responseText);
           let response = JSON.parse(xhr.responseText);
-          let contacts = response.results;
-          let cards = "";
-          let slides = 0;
-          console.log("Contacts:", contacts);
-          let cardCarousel = document.getElementById("carousel-inner");
-          for (let i = 0; i < contacts.length; i++) {
-            let contact = contacts[i];
-            let cardClass = `phone-card-${(i % 3) + 1}`;
-            if (i % 3 == 0) {
-              if (slides !== 0) {
-                cards += `</div></div>`;
+
+          if (response.hasOwnProperty("error")) {
+            displayNoContactsFound();
+          } else {
+            let contacts = response.results;
+            let cards = "";
+            let slides = 0;
+            let cardCarousel = document.getElementById("carousel-inner");
+
+            if (contacts.length === 0) {
+              displayNoContactsFound();
+            } else {
+              for (let i = 0; i < contacts.length; i++) {
+                let contact = contacts[i];
+                let cardClass = `phone-card-${(i % 3) + 1}`;
+                if (i % 3 == 0) {
+                  if (slides !== 0) {
+                    cards += `</div></div>`;
+                  }
+                  cards += `<div class="carousel-item ${
+                    slides === 0 ? "active" : ""
+                  }"><div class="cards-wrapper">`;
+                  slides++;
+                }
+                cards += `
+                  <div class="card ${cardClass} card-hover">
+                    <div class="card-body details-body">
+                      <h5 class="card-title"><b> Name:</b> ${contact.Name}</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">
+                        <b> Organization:</b> ${contact.Organization}
+                      </h6>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">
+                        <b> Country: </b> ${contact.Country}
+                      </h6>
+                      <p class="card-text">
+                        <b> Email:</b> ${contact.Email}
+                      </p>
+                      <p class="card-text">
+                        <b> Phone Number:</b> ${contact.Phone}
+                      </p>
+                    </div>
+                  </div>
+                `;
               }
-              cards += `<div class="carousel-item ${
-                slides === 0 ? "active" : ""
-              }"><div class="cards-wrapper">`;
-              slides++;
+              cardCarousel.innerHTML = cards;
             }
-            cards += `
-              <div class="card ${cardClass} card-hover">
-                <div class="card-body details-body">
-                  <h5 class="card-title"><b> Name:</b> ${contact.Name}</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">
-                    <b> Organization:</b> ${contact.Organization}
-                  </h6>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">
-                    <b> Country: </b> ${contact.Country}
-                  </h6>
-                  <p class="card-text">
-                    <b> Email:</b>
-                  </p>
-                  <p class="card-text">
-                    ${contact.Email}
-                  </p>
-                  <p class="card-text">
-                    <b> Phone Number:</b>
-                  </p>
-                  <p class="card-text">
-                    ${contact.Phone}
-                  </p>
-                </div>
-              </div>
-            `;
           }
-          cardCarousel.innerHTML = cards;
         } catch (error) {
           console.error("Error parsing response:", error);
         }
@@ -264,6 +267,22 @@ displayContacts = () => {
     console.error("Error sending request:", err);
   }
 };
+
+function displayNoContactsFound() {
+  let cardCarousel = document.getElementById("carousel-inner");
+  cardCarousel.innerHTML = `
+                  <div class="card phone-card-2 card-hover">
+                    <div class="card-body details-body">
+                      <h5 class="card-title"><b>Contacts are displayed here!</b></h5>
+                      <p></p>
+                      <p style="font-size:2rem">👋≧◉ᴥ◉≦</p>
+                      <p></p>
+                      <h5 class="card-title"><b><- Start adding your contacts in the manage page</b></h5>
+                    </div>
+                  </div>
+  `;
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.getElementById("logout-button");
