@@ -83,6 +83,7 @@ body {
 .cards-wrapper {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -98,6 +99,7 @@ body {
 }
 .carousel-inner {
   padding: 1em;
+  flex-wrap: nowrap;
 }
 .carousel-control-prev,
 .carousel-control-next {
@@ -132,11 +134,16 @@ body {
 }
 
 .carousel-item .card {
-  flex: 1 1 30%;
-  width: 30vw;
+  flex: 1 1 25%;
+
   height: auto;
 }
 
+.carousel-item {
+  display: flex;
+  flex-direction: row; /* Align items horizontally */
+  width: 100%; /* Full width of the carousel */
+}
 @media (max-width: 768px) {
   .carousel-item .card {
     width: 20vw;
@@ -165,16 +172,17 @@ body {
 }
 #carouselExample {
   height: 100%;
-  width: 70%;
+  width: 100% auto;
   max-width: 1200px;
-  margin-right: 50%;
-  margin-left: 10%;
+  margin-right: 18%;
 }
 
 .carousel-inner {
   width: 100%;
   max-width: 100%;
   height: 100%;
+  display: flex;
+  flex: 2;
 }
 
 .container-fluid {
@@ -195,6 +203,7 @@ body {
   max-width: 320px;
   margin: 20px;
   z-index: 2; /* Ensures it's layered above the image */
+  border: 5px solid black;
 }
 
 .phone-card-1::before {
@@ -241,4 +250,25 @@ body {
   margin-top: 4rem;
   position: relative; /* Ensures the card content is above the background */
   z-index: 2; /* Puts the text above the background image */
+}
+
+@media (max-width: 1400px) {
+  .carousel-item .card {
+    flex: 1 1 25%; 
+    width: 25%; 
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-item .card {
+    flex: 1 1 50%; 
+    width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-item .card {
+    flex: 1 1 100%; 
+    width: 100%;
+  }
 }
