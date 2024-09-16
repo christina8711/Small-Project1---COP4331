@@ -70,9 +70,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (filteredContacts != undefined && filteredContacts.length > 0) {
       foundMatch = true;
-      displayFilteredContacts(filteredContacts);
+      displayContacts(filteredContacts);
     } else {
-      displayFilteredContacts([]); // Clear the table if no matches found
+      displayContacts(); // Clear the table if no matches found
     }
 
     // If no match was found, show the toast message
