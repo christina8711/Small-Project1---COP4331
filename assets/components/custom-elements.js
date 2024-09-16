@@ -49,6 +49,8 @@ class NavSidebar extends HTMLElement {
           </li>
         </ul>
         <ul class="nav nav-pills flex-column align-items-center align-items-sm-start">
+          <a href="index.html" class="nav-content nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right"
+            data-bs-original-title="Logout">
           <li class=" nav-item nav-content logout">
               <svg class="navicons" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"
                 text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd"
