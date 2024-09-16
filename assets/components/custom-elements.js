@@ -52,6 +52,7 @@ class NavSidebar extends HTMLElement {
           <a href="index.html" class="nav-content nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right"
             data-bs-original-title="Logout">
           <li class=" nav-item nav-content logout">
+          <div></div>
               <svg class="navicons" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"
                 text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd"
                 clip-rule="evenodd" viewBox="0 0 474 512.46">
