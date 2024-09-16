@@ -275,7 +275,7 @@ function displayNoContactsFound() {
                     <div class="card-body details-body">
                       <h5 class="card-title"><b>Contacts are displayed here!</b></h5>
                       <p></p>
-                      <cat-emoji></cat-emoji>
+                      <div class="textmoji"><cat-emoji class="textmoji"></cat-emoji></div>
                       <p></p>
                       <h5 class="card-title"><b><- Start adding your contacts in the manage page</b></h5>
                     </div>

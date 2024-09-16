@@ -30,7 +30,7 @@ body {
 .navicons {
   width: 2rem;
   height: 2rem;
-  fill: white;
+  fill: white !important;
   z-index: 1;
 }
 
@@ -271,4 +271,7 @@ body {
     flex: 1 1 100%; 
     width: 100%;
   }
+}
+.textmoji{
+  width:10vw;
 }
