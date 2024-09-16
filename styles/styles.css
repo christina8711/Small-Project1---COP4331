@@ -1,4 +1,5 @@
-body {
+body,
+html {
   background: radial-gradient(
     939px at 0.7% 2.4%,
     rgb(116, 106, 255) 0%,
@@ -7,8 +8,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
-
 
 .sidebar {
   position: fixed;
@@ -71,7 +72,6 @@ body {
   margin-bottom: 1rem;
 }
 
-
 .search-bar-fixed-top {
   position: fixed;
   justify-content: center;
@@ -91,13 +91,19 @@ body {
   box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
   border: none;
   border-radius: 0;
+  transition: 0.4s ease-out;
+}
+.card:hover {
+  transform: translateY(-20px);
+  transition: 0.4s ease-out;
 }
 .carousel-inner {
   padding: 1em;
 }
+
 .carousel-control-prev,
 .carousel-control-next {
-  background-color: gray;
+  background-color: #3830ab;
   opacity: 50%;
   width: 5vh;
   height: 5vh;
@@ -105,10 +111,10 @@ body {
   top: 100%;
 }
 .carousel-control-next {
-  transform: translateX(-550%);
+  transform: translateX(100%) translateY(-800%);
 }
 .carousel-control-prev {
-  transform: translateX(550%);
+  transform: translateX(-100%) translateY(-800%);
 }
 .carousel {
   width: 100%;
@@ -139,26 +145,112 @@ body {
   }
 }
 
-.pop-up1{
+.pop-up1 {
   transform: translateY(15vh);
 }
 
-.pop-up{
-    background-color: #746aff;
-    color: white;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
-    width: 100%;
+.pop-up {
+  background-color: #746aff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
 }
 
-.mitski-icons-buttons{
+.mitski-icons-buttons {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
 
+#carouselExample {
+  height: 100%;
+  width: 70%;
+  max-width: 1200px;
+  margin-right: 50%;
+  margin-left: 10%;
+}
 
+.carousel-inner {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
 
+.container-fluid {
+  padding: 0;
+  margin: 0 auto;
+}
+.phone-card-1,
+.phone-card-2,
+.phone-card-3 {
+  position: relative; /* Ensures layering works */
+  background-color: black;
+  padding: 20px;
+  border-radius: 10px; /* Softens the edges */
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9); /* Adds a subtle shadow */
+  min-height: 680px;
+  min-width: 250px;
+  margin: 20px;
+  z-index: 2; /* Ensures it's layered above the image */
+}
+
+.phone-card-1::before {
+  content: "";
+  background-image: url("../assets/images/Nokia-phone1.jpg"); /* Path to your phone SVG image */
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1; /* Puts the image behind the content */
+  border-radius: 10px; /* Matches the card's corners */
+}
+.phone-card-2::before {
+  content: "";
+  background-image: url("../assets/images/Nokia-phone2.jpg"); /* Path to your phone SVG image */
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1; /* Puts the image behind the content */
+  border-radius: 10px; /* Matches the card's corners */
+}
+.phone-card-3::before {
+  content: "";
+  background-image: url("../assets/images/Nokia-phone3.jpg"); /* Path to your phone SVG image */
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1; /* Puts the image behind the content */
+  border-radius: 10px; /* Matches the card's corners */
+}
+
+.card-body {
+  margin-top: 4rem;
+  position: relative; /* Ensures the card content is above the background */
+  z-index: 2; /* Puts the text above the background image */
+}
+.card-text {
+  font-size: 0.95rem;
+}
+.card-subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+}
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}

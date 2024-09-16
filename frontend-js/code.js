@@ -212,37 +212,41 @@ displayContacts = () => {
           let cardCarousel = document.getElementById("carousel-inner");
           for (let i = 0; i < contacts.length; i++) {
             let contact = contacts[i];
-            if(i % 3 == 0){
-              if(slides !== 0){
+            let cardClass = `phone-card-${(i % 3) + 1}`;
+            if (i % 3 == 0) {
+              if (slides !== 0) {
                 cards += `</div></div>`;
               }
-              cards += `<div class="carousel-item ${slides=== 0 ? 'active' : ''}"><div class="cards-wrapper">`;
+              cards += `<div class="carousel-item ${
+                slides === 0 ? "active" : ""
+              }"><div class="cards-wrapper">`;
               slides++;
             }
             cards += `
-          <div class="card" style="width: 18rem">
-                      <div class="card-body">
-                        <h5 class="card-title">${contact.Name}</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">
-                          ${contact.Organization}
-                        </h6>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">
-                          ${contact.Country}
-                        </h6>
-                        <p class="card-text">
-                          <b>${contact.Email}:</b>
-                        </p>
-                        <p>N/A</p>
-                        <p class="card-text">
-                          <b>${contact.Phone}:</b>
-                        </p>
-                        <p>N/A</p>
-                        <a href="#" class="card-link text-primary">Edit</a>
-                        <a href="#" class="card-link text-danger">Delete</a>
-                      </div>
-            </div>
+              <div class="card ${cardClass}">
+                <div class="card-body">
+                  <h5 class="card-title"><b> Name:</b> ${contact.Name}</h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">
+                    <b> Organization:</b> ${contact.Organization}
+                  </h6>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">
+                    <b> Country: </b> ${contact.Country}
+                  </h6>
+                  <p class="card-text">
+                    <b> Email:</b>
+                  </p>
+                  <p class="card-text">
+                    ${contact.Email}
+                  </p>
+                  <p class="card-text">
+                    <b> Phone Number:</b>
+                  </p>
+                  <p class="card-text">
+                    ${contact.Phone}
+                  </p>
+                </div>
+              </div>
             `;
-
           }
           cardCarousel.innerHTML = cards;
         } catch (error) {
@@ -267,7 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutButton.addEventListener("click", Logout);
   }
 });
-
 
 if (document.title == "Manage Page") {
   console.log("Manage Page Loaded");

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+    <script type="module" src="assets/components/contact-cards-img.js"></script>
     <script type="module" src="assets/components/custom-elements.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,68 +31,46 @@
           <nav-sidebar></nav-sidebar>
         </div>
         <!--Start of Contacts Card Carousel-->
-        <div class="col-sm p-2 min-vh-100">
-          <div
-            class="d-flex justify-content-end align-items-center"
-            style="min-height: 100vh"
-          >
-            <div id="carouselExample" class="carousel slide">
-              <div class="carousel-inner" id="carousel-inner">
-              </div>
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExample"
-                data-bs-slide="prev"
-              >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExample"
-                data-bs-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!--End of Contacts Card Carousel-->
-        <!--Start of Contacts Search Widget-->
-        <div class="col-sm p-2 min-vh-100">
-          <div
-            class="navbar navbar-light search-bar-fixed-top"
-            style="max-width: 100%; background: #746aff"
-          >
-            <div class="form-inline">
-              <div class="input-group m-3">
-                <input
-                  class="form-control mr-sm-2"
-                  type="search"
-                  placeholder="First and Last Name"
-                  aria-label="Find Contact"
-                />
+        <div>
+          <div class="col-sm p-2 min-vh-100">
+            <div
+              class="d-flex justify-content-center align-items-center"
+              style="min-height: 100vh"
+            >
+              <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner" id="carousel-inner">
+                  <!-- Add your carousel items here -->
+                </div>
                 <button
-                  class="btn btn-outline-dark my-2 my-sm-0"
-                  type="submit"
-                  style="background: #9992f6"
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExample"
+                  data-bs-slide="prev"
                 >
-                  Search
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExample"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <!--End of Contacts Search Widget-->
+        <!--End of Contacts Card Carousel-->
       </div>
     </div>
 
