@@ -212,6 +212,7 @@ displayContacts = () => {
             let contacts = response.results;
             let cards = "";
             let slides = 0;
+            console.log("Contacts:", contacts);
             let cardCarousel = document.getElementById("carousel-inner");
 
             if (contacts.length === 0) {
@@ -282,7 +283,6 @@ function displayNoContactsFound() {
                   </div>
   `;
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.getElementById("logout-button");

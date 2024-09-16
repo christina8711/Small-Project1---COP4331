@@ -133,13 +133,13 @@ body {
   gap: 15px;
 }
 
-.carousel-item .card {
+.carousel-item .active {
   flex: 1 1 25%;
 
   height: auto;
 }
 
-.carousel-item {
+.carousel-item .active{
   display: flex;
   flex-direction: row; /* Align items horizontally */
   width: 100%; /* Full width of the carousel */
@@ -253,21 +253,21 @@ body {
 }
 
 @media (max-width: 1400px) {
-  .carousel-item .card {
+  .carousel-item .active {
     flex: 1 1 25%; 
     width: 25%; 
   }
 }
 
 @media (max-width: 768px) {
-  .carousel-item .card {
+  .carousel-item .active {
     flex: 1 1 50%; 
     width: 50%;
   }
 }
 
 @media (max-width: 576px) {
-  .carousel-item .card {
+  .carousel-item .active {
     flex: 1 1 100%; 
     width: 100%;
   }
