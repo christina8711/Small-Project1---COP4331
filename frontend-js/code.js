@@ -130,7 +130,6 @@ register = () => {
           let jsonObject = JSON.parse(xhr.responseText);
           userId = jsonObject.id;
           console.log("User registered successfully, UserID:", userId); // Log UserID
-          document.getElementById("register-status").innerHTML = "User added";
           window.location.href = "homepage.html";
         } else if (xhr.status == 409) {
           console.log("User already exists"); // Log if user already exists
