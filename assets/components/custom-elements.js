@@ -72,262 +72,108 @@ class NavSidebar extends HTMLElement {
 }
 customElements.define("nav-sidebar", NavSidebar);
 
-class CountriesList extends HTMLElement {
+class TextEmoji extends HTMLElement {
   connectedCallback() {
-    this.innerHTML = `
-  <div class="input-group mb-3">
-<select id="country" name="country" class="form-control">
-    <option value="Select">Select</option>
-    <option value="Afghanistan">Afghanistan</option>
-    <option value="Åland Islands">Åland Islands</option>
-    <option value="Albania">Albania</option>
-    <option value="Algeria">Algeria</option>
-    <option value="American Samoa">American Samoa</option>
-    <option value="Andorra">Andorra</option>
-    <option value="Angola">Angola</option>
-    <option value="Anguilla">Anguilla</option>
-    <option value="Antarctica">Antarctica</option>
-    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-    <option value="Argentina">Argentina</option>
-    <option value="Armenia">Armenia</option>
-    <option value="Aruba">Aruba</option>
-    <option value="Australia">Australia</option>
-    <option value="Austria">Austria</option>
-    <option value="Azerbaijan">Azerbaijan</option>
-    <option value="Bahamas">Bahamas</option>
-    <option value="Bahrain">Bahrain</option>
-    <option value="Bangladesh">Bangladesh</option>
-    <option value="Barbados">Barbados</option>
-    <option value="Belarus">Belarus</option>
-    <option value="Belgium">Belgium</option>
-    <option value="Belize">Belize</option>
-    <option value="Benin">Benin</option>
-    <option value="Bermuda">Bermuda</option>
-    <option value="Bhutan">Bhutan</option>
-    <option value="Bolivia">Bolivia</option>
-    <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-    <option value="Botswana">Botswana</option>
-    <option value="Bouvet Island">Bouvet Island</option>
-    <option value="Brazil">Brazil</option>
-    <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
-    <option value="Brunei Darussalam">Brunei Darussalam</option>
-    <option value="Bulgaria">Bulgaria</option>
-    <option value="Burkina Faso">Burkina Faso</option>
-    <option value="Burundi">Burundi</option>
-    <option value="Cambodia">Cambodia</option>
-    <option value="Cameroon">Cameroon</option>
-    <option value="Canada">Canada</option>
-    <option value="Cape Verde">Cape Verde</option>
-    <option value="Cayman Islands">Cayman Islands</option>
-    <option value="Central African Republic">Central African Republic</option>
-    <option value="Chad">Chad</option>
-    <option value="Chile">Chile</option>
-    <option value="China">China</option>
-    <option value="Christmas Island">Christmas Island</option>
-    <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
-    <option value="Colombia">Colombia</option>
-    <option value="Comoros">Comoros</option>
-    <option value="Congo">Congo</option>
-    <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
-    <option value="Cook Islands">Cook Islands</option>
-    <option value="Costa Rica">Costa Rica</option>
-    <option value="Cote D'ivoire">Cote D'ivoire</option>
-    <option value="Croatia">Croatia</option>
-    <option value="Cuba">Cuba</option>
-    <option value="Cyprus">Cyprus</option>
-    <option value="Czech Republic">Czech Republic</option>
-    <option value="Denmark">Denmark</option>
-    <option value="Djibouti">Djibouti</option>
-    <option value="Dominica">Dominica</option>
-    <option value="Dominican Republic">Dominican Republic</option>
-    <option value="Ecuador">Ecuador</option>
-    <option value="Egypt">Egypt</option>
-    <option value="El Salvador">El Salvador</option>
-    <option value="Equatorial Guinea">Equatorial Guinea</option>
-    <option value="Eritrea">Eritrea</option>
-    <option value="Estonia">Estonia</option>
-    <option value="Ethiopia">Ethiopia</option>
-    <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
-    <option value="Faroe Islands">Faroe Islands</option>
-    <option value="Fiji">Fiji</option>
-    <option value="Finland">Finland</option>
-    <option value="France">France</option>
-    <option value="French Guiana">French Guiana</option>
-    <option value="French Polynesia">French Polynesia</option>
-    <option value="French Southern Territories">French Southern Territories</option>
-    <option value="Gabon">Gabon</option>
-    <option value="Gambia">Gambia</option>
-    <option value="Georgia">Georgia</option>
-    <option value="Germany">Germany</option>
-    <option value="Ghana">Ghana</option>
-    <option value="Gibraltar">Gibraltar</option>
-    <option value="Greece">Greece</option>
-    <option value="Greenland">Greenland</option>
-    <option value="Grenada">Grenada</option>
-    <option value="Guadeloupe">Guadeloupe</option>
-    <option value="Guam">Guam</option>
-    <option value="Guatemala">Guatemala</option>
-    <option value="Guernsey">Guernsey</option>
-    <option value="Guinea">Guinea</option>
-    <option value="Guinea-bissau">Guinea-bissau</option>
-    <option value="Guyana">Guyana</option>
-    <option value="Haiti">Haiti</option>
-    <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
-    <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
-    <option value="Honduras">Honduras</option>
-    <option value="Hong Kong">Hong Kong</option>
-    <option value="Hungary">Hungary</option>
-    <option value="Iceland">Iceland</option>
-    <option value="India">India</option>
-    <option value="Indonesia">Indonesia</option>
-    <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
-    <option value="Iraq">Iraq</option>
-    <option value="Ireland">Ireland</option>
-    <option value="Isle of Man">Isle of Man</option>
-    <option value="Israel">Israel</option>
-    <option value="Italy">Italy</option>
-    <option value="Jamaica">Jamaica</option>
-    <option value="Japan">Japan</option>
-    <option value="Jersey">Jersey</option>
-    <option value="Jordan">Jordan</option>
-    <option value="Kazakhstan">Kazakhstan</option>
-    <option value="Kenya">Kenya</option>
-    <option value="Kiribati">Kiribati</option>
-    <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
-    <option value="Korea, Republic of">Korea, Republic of</option>
-    <option value="Kuwait">Kuwait</option>
-    <option value="Kyrgyzstan">Kyrgyzstan</option>
-    <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
-    <option value="Latvia">Latvia</option>
-    <option value="Lebanon">Lebanon</option>
-    <option value="Lesotho">Lesotho</option>
-    <option value="Liberia">Liberia</option>
-    <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
-    <option value="Liechtenstein">Liechtenstein</option>
-    <option value="Lithuania">Lithuania</option>
-    <option value="Luxembourg">Luxembourg</option>
-    <option value="Macao">Macao</option>
-    <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
-    <option value="Madagascar">Madagascar</option>
-    <option value="Malawi">Malawi</option>
-    <option value="Malaysia">Malaysia</option>
-    <option value="Maldives">Maldives</option>
-    <option value="Mali">Mali</option>
-    <option value="Malta">Malta</option>
-    <option value="Marshall Islands">Marshall Islands</option>
-    <option value="Martinique">Martinique</option>
-    <option value="Mauritania">Mauritania</option>
-    <option value="Mauritius">Mauritius</option>
-    <option value="Mayotte">Mayotte</option>
-    <option value="Mexico">Mexico</option>
-    <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
-    <option value="Moldova, Republic of">Moldova, Republic of</option>
-    <option value="Monaco">Monaco</option>
-    <option value="Mongolia">Mongolia</option>
-    <option value="Montenegro">Montenegro</option>
-    <option value="Montserrat">Montserrat</option>
-    <option value="Morocco">Morocco</option>
-    <option value="Mozambique">Mozambique</option>
-    <option value="Myanmar">Myanmar</option>
-    <option value="Namibia">Namibia</option>
-    <option value="Nauru">Nauru</option>
-    <option value="Nepal">Nepal</option>
-    <option value="Netherlands">Netherlands</option>
-    <option value="Netherlands Antilles">Netherlands Antilles</option>
-    <option value="New Caledonia">New Caledonia</option>
-    <option value="New Zealand">New Zealand</option>
-    <option value="Nicaragua">Nicaragua</option>
-    <option value="Niger">Niger</option>
-    <option value="Nigeria">Nigeria</option>
-    <option value="Niue">Niue</option>
-    <option value="Norfolk Island">Norfolk Island</option>
-    <option value="Northern Mariana Islands">Northern Mariana Islands</option>
-    <option value="Norway">Norway</option>
-    <option value="Oman">Oman</option>
-    <option value="Pakistan">Pakistan</option>
-    <option value="Palau">Palau</option>
-    <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
-    <option value="Panama">Panama</option>
-    <option value="Papua New Guinea">Papua New Guinea</option>
-    <option value="Paraguay">Paraguay</option>
-    <option value="Peru">Peru</option>
-    <option value="Philippines">Philippines</option>
-    <option value="Pitcairn">Pitcairn</option>
-    <option value="Poland">Poland</option>
-    <option value="Portugal">Portugal</option>
-    <option value="Puerto Rico">Puerto Rico</option>
-    <option value="Qatar">Qatar</option>
-    <option value="Reunion">Reunion</option>
-    <option value="Romania">Romania</option>
-    <option value="Russian Federation">Russian Federation</option>
-    <option value="Rwanda">Rwanda</option>
-    <option value="Saint Helena">Saint Helena</option>
-    <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
-    <option value="Saint Lucia">Saint Lucia</option>
-    <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
-    <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
-    <option value="Samoa">Samoa</option>
-    <option value="San Marino">San Marino</option>
-    <option value="Sao Tome and Principe">Sao Tome and Principe</option>
-    <option value="Saudi Arabia">Saudi Arabia</option>
-    <option value="Senegal">Senegal</option>
-    <option value="Serbia">Serbia</option>
-    <option value="Seychelles">Seychelles</option>
-    <option value="Sierra Leone">Sierra Leone</option>
-    <option value="Singapore">Singapore</option>
-    <option value="Slovakia">Slovakia</option>
-    <option value="Slovenia">Slovenia</option>
-    <option value="Solomon Islands">Solomon Islands</option>
-    <option value="Somalia">Somalia</option>
-    <option value="South Africa">South Africa</option>
-    <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>
-    <option value="Spain">Spain</option>
-    <option value="Sri Lanka">Sri Lanka</option>
-    <option value="Sudan">Sudan</option>
-    <option value="Suriname">Suriname</option>
-    <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
-    <option value="Swaziland">Swaziland</option>
-    <option value="Sweden">Sweden</option>
-    <option value="Switzerland">Switzerland</option>
-    <option value="Syrian Arab Republic">Syrian Arab Republic</option>
-    <option value="Taiwan">Taiwan</option>
-    <option value="Tajikistan">Tajikistan</option>
-    <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
-    <option value="Thailand">Thailand</option>
-    <option value="Timor-leste">Timor-leste</option>
-    <option value="Togo">Togo</option>
-    <option value="Tokelau">Tokelau</option>
-    <option value="Tonga">Tonga</option>
-    <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-    <option value="Tunisia">Tunisia</option>
-    <option value="Turkey">Turkey</option>
-    <option value="Turkmenistan">Turkmenistan</option>
-    <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
-    <option value="Tuvalu">Tuvalu</option>
-    <option value="Uganda">Uganda</option>
-    <option value="Ukraine">Ukraine</option>
-    <option value="United Arab Emirates">United Arab Emirates</option>
-    <option value="United Kingdom">United Kingdom</option>
-    <option value="United States">United States</option>
-    <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
-    <option value="Uruguay">Uruguay</option>
-    <option value="Uzbekistan">Uzbekistan</option>
-    <option value="Vanuatu">Vanuatu</option>
-    <option value="Venezuela">Venezuela</option>
-    <option value="Viet Nam">Viet Nam</option>
-    <option value="Virgin Islands, British">Virgin Islands, British</option>
-    <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
-    <option value="Wallis and Futuna">Wallis and Futuna</option>
-    <option value="Western Sahara">Western Sahara</option>
-    <option value="Yemen">Yemen</option>
-    <option value="Zambia">Zambia</option>
-    <option value="Zimbabwe">Zimbabwe</option>
-</select>
-</div>`;
+    this.innerHTML = `<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125.08 24.88">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #181818;
+      }
+
+      .cls-2 {
+        fill: #ffc841;
+      }
+
+      .cls-3 {
+        fill: #efeeee;
+      }
+
+      .cls-4 {
+        fill: #101010;
+      }
+
+      .cls-5 {
+        fill: #141515;
+      }
+
+      .cls-6 {
+        fill: #030303;
+      }
+
+      .cls-7 {
+        fill: #6c91cb;
+      }
+
+      .cls-8 {
+        fill: #181919;
+      }
+
+      .cls-9 {
+        fill: #0a0a0a;
+      }
+
+      .cls-10 {
+        fill: #d88529;
+      }
+
+      .cls-11 {
+        fill: #d98628;
+      }
+
+      .cls-12 {
+        fill: #6d92cc;
+      }
+
+      .cls-13 {
+        fill: #151616;
+      }
+
+      .cls-14 {
+        fill: #d98629;
+      }
+
+      .cls-15 {
+        fill: #0c0c0c;
+      }
+
+      .cls-16 {
+        fill: #da8829;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer_1">
+    <g>
+      <path class="cls-2" d="M13.6,4.04c1.61-.67,2.25-.44,2.96,1.01.74,1.53,1.48,3.07,2.27,4.58.22.43.6.77.91,1.15.09.34.19.69.28,1.03.12,0,.24-.01.36-.02.43-1.82.86-3.64,1.29-5.47,1.62.06,2.37.72,2.25,2.28-.23,2.89.09,5.69.69,8.52.49,2.31-.18,4.44-2.09,5.97-1.98,1.58-4.23,2.37-6.7,1.29-1.16-.51-2.31-1.2-3.26-2.03-1.98-1.73-3.89-3.56-5.69-5.47-.47-.5-.78-1.62-.54-2.19.24-.57,1.26-.82,1.94-1.2,1.09,1.01,2.18,2.01,3.28,3.02.16-.13.31-.26.47-.38-.37-.48-.68-1.05-1.13-1.44-1.63-1.41-3.19-2.84-2.87-5.3.73.01,1.47.02,2.2.03.6.98,1.15,1.99,1.82,2.93.3.41.83.66,1.25.98-.16-.51-.21-1.09-.49-1.52-1.29-2.02-2.77-3.94-2.83-6.49,1.3-1,2.2-.24,3.06.69.8,1.85,1.14,3.93,2.62,5.44.12-.04.23-.09.35-.13-.8-2.43-1.59-4.85-2.39-7.28Z"/>
+      <path class="cls-1" d="M50.78,12.27c.1-4.96,4.29-8.89,9.37-8.77,4.97.11,8.98,4.24,8.86,9.13-.11,5.07-4.29,9.06-9.37,8.95-4.97-.1-8.96-4.3-8.86-9.31ZM52.73,12.46c.03,4.24,3.19,7.48,7.28,7.45,3.95-.02,7.08-3.37,7.05-7.54-.02-4.1-3.22-7.23-7.35-7.2-3.88.03-7,3.29-6.98,7.29Z"/>
+      <path class="cls-8" d="M96.74,21.59c-5.03,0-9.2-4.18-9.15-9.2.04-4.88,4.17-8.89,9.15-8.89,4.97,0,9.14,4.04,9.16,8.88.02,5.03-4.13,9.2-9.16,9.2ZM96.66,19.92c4.07,0,7.28-3.29,7.28-7.49,0-4.01-3.2-7.25-7.18-7.26-3.98,0-7.19,3.21-7.21,7.23-.01,4.13,3.18,7.5,7.11,7.51Z"/>
+      <path class="cls-4" d="M80.5,18.36c.79.61,1.78,1.01,3.09.44.41-.18,1.08.24,1.63.38-.15.52-.15,1.21-.49,1.53-1.27,1.19-3.17,1.14-5.17.02-.4-.23-.78-.49-1.07-.68-1.16.49-2.22,1.03-3.34,1.4-1.24.41-2.41,0-3.34-.83-.31-.28-.51-1.15-.31-1.41.26-.35,1.1-.64,1.45-.47,1.35.65,2.39.25,3.14-.35-.48-1.76-1.12-3.31-1.28-4.92-.2-2,1.55-3.4,3.74-3.31,2.12.09,3.62,1.57,3.32,3.59-.23,1.52-.87,2.97-1.38,4.59Z"/>
+      <path class="cls-5" d="M109.49,9.24v-2.02c5.15-1.85,10.29-3.69,15.54-5.58v2.35c-4.19,1.36-8.45,2.73-13.1,4.24,4.62,1.5,8.87,2.87,13.14,4.25v2.09c-5.24-1.79-10.4-3.56-15.58-5.33Z"/>
+      <path class="cls-13" d="M31.62,14.57v-2.1c4.24-1.37,8.48-2.75,13.12-4.25-4.63-1.49-8.85-2.85-13.1-4.23V1.65c3.41,1.23,6.72,2.41,10.03,3.61,1.64.59,3.29,1.17,4.9,1.85.32.14.63.72.63,1.1,0,.38-.29,1.01-.6,1.12-4.92,1.77-9.87,3.47-14.98,5.24Z"/>
+      <path class="cls-6" d="M31.64,17.61v-1.8h15.51v1.8h-15.51Z"/>
+      <path class="cls-6" d="M125.03,17.64h-15.51v-1.79h15.51v1.79Z"/>
+      <path class="cls-6" d="M47.2,20.81v1.8h-15.54v-1.8h15.54Z"/>
+      <path class="cls-6" d="M109.55,20.81h15.5v1.78h-15.5v-1.78Z"/>
+      <path class="cls-14" d="M9.95,5.32c.07,2.55,1.54,4.47,2.83,6.49.28.43.33,1.01.49,1.52-.43-.32-.96-.57-1.25-.98-.67-.93-1.22-1.95-1.82-2.93-.26-.63-.52-1.28-.8-1.9-.39-.88-.21-1.61.55-2.2Z"/>
+      <path class="cls-12" d="M7.11,18.84c-.58.04-.99.15-1.38.09-2.19-.37-4.03-2.34-4.23-4.54-.02-.28.24-.58.37-.87.18.17.49.33.51.52.32,2.45,1.71,3.79,4.14,4.09.09.01.18.07.24.13.06.06.09.15.34.59Z"/>
+      <path class="cls-7" d="M18.36,6.87c-.66-1.2-1.07-2.5-1.93-3.35-.8-.78-2.08-1.07-3.19-1.6,1.32-.82,3.35-.04,4.54,1.67,1.11,1.6,1.27,2.75.58,3.28Z"/>
+      <path class="cls-12" d="M5.31,20.07c-.95.71-1.83.27-2.6-.11C1.1,19.18.29,17.75,0,16.02c-.04-.25.18-.54.29-.82.19.14.53.27.55.44.32,2.5,1.88,3.67,4.22,4.05.06,0,.1.14.25.38Z"/>
+      <path class="cls-10" d="M8,9.39c-.32,2.46,1.24,3.89,2.87,5.3.45.39.76.95,1.13,1.44-.16.13-.31.26-.47.38-1.09-1.01-2.18-2.01-3.28-3.02-.35-.97-.8-1.92-1-2.92-.07-.33.48-.79.75-1.19Z"/>
+      <path class="cls-12" d="M20.01,5.53c-.7-1.35-1.04-2.6-1.84-3.39-.81-.8-2.07-1.14-3.37-1.81,1.23-.69,2.16-.16,3.03.31,1.71.93,2.6,2.77,2.18,4.89Z"/>
+      <path class="cls-11" d="M13.6,4.04c.8,2.43,1.59,4.85,2.39,7.28-.12.04-.23.09-.35.13-1.47-1.51-1.81-3.59-2.62-5.44.19-.66.39-1.31.58-1.97Z"/>
+      <path class="cls-16" d="M21.66,6.33c-.43,1.82-.86,3.64-1.29,5.47-.12,0-.24.01-.36.02-.09-.34-.19-.69-.28-1.03.09-.72.15-1.45.27-2.16.17-1.02.27-2.12,1.65-2.29Z"/>
+      <path class="cls-3" d="M102.3,12.42c-.02-3.04-2.54-5.57-5.57-5.57-3.02,0-5.58,2.55-5.57,5.57,0,3.2,2.58,5.86,5.65,5.82,3.01-.04,5.52-2.7,5.5-5.82Z"/>
+      <path class="cls-15" d="M59.89,6.85c3.04,0,5.55,2.53,5.56,5.58.01,3.2-2.58,5.87-5.65,5.82-3.01-.05-5.52-2.7-5.52-5.83,0-2.99,2.61-5.57,5.61-5.56Z"/>
+      <path class="cls-9" d="M102.3,12.42c.02,3.13-2.49,5.78-5.5,5.82-3.07.04-5.65-2.62-5.65-5.82,0-3.02,2.56-5.57,5.57-5.57,3.03,0,5.56,2.53,5.57,5.57Z"/>
+    </g>
+  </g>
+</svg>
+`;
   }
 }
 
-customElements.define("countries-list", CountriesList);
+customElements.define("cat-emoji", TextEmoji);
 
 class MitskiThumbsUp extends HTMLElement {
   connectedCallback() {
