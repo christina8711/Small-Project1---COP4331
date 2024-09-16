@@ -133,9 +133,9 @@ body {
   gap: 15px;
 }
 
-.carousel-item .active {
+.carousel-item .card {
   flex: 1 1 25%;
-
+  width:25%;
   height: auto;
 }
 
@@ -145,7 +145,7 @@ body {
   width: 100%; /* Full width of the carousel */
 }
 @media (max-width: 768px) {
-  .carousel-item .card {
+  .carousel-item .active {
     width: 20vw;
   }
 }
